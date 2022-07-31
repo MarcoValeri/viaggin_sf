@@ -1,0 +1,46 @@
+.header {
+    position: relative;
+    height: 40vh;
+
+    &__container {
+        position: absolute;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 2rem 0;
+        text-align: center;
+        border-bottom: 3px solid $black;
+        z-index: 1;
+
+
+    }
+
+    &__logo {
+        display: inline-block;
+        width: 15rem;
+    }
+
+}
+
+/*
+* Add more height for device with screen
+* height less then 800px
+* like laptop 15.6''
+*/
+@media screen and (max-height: 800px) {
+    .header {
+        height: 50vh;
+    }
+}
+
+/*
+* Add more height for device with screen
+* height less then 700px
+* like iPhone 4 and iPhone SE
+*/
+@media screen and (max-height: 700px) {
+    .header {
+        height: 90vh;
+    }
+}

@@ -1,0 +1,14 @@
+// Include abstract files
+@import './abstract/mixins';
+@import './abstract/variables';
+
+// Include base files
+@import './base/base';
+@import './base/typography';
+
+// Include layout files
+@import './layout/header';
+@import './layout/navbar';
+
+// Include page files
+@import './pages/home';

@@ -1,0 +1,43 @@
+.home {
+
+    // &__main {
+    //     border: 1px solid #f00;
+    // }
+
+    &__grid-categories {
+        width: 80%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 2fr;
+        grid-template-areas: 
+        "home__container-viaggi home__container-eventi"
+        "home__container-documenti home__container-estero";
+        border: 1px solid #f00;
+    }
+
+    &__container {
+        width: 60rem;
+        border: 1px solid #f00;
+    }
+
+    .home__container-viaggi {
+        grid-template-areas: home__container-viaggi;
+        border: 1px solid #f00;
+    }
+
+    .home__container-eventi {
+        grid-template-areas: home__container-eventi;
+        border: 1px solid #f00;
+    }
+
+    .home__container-documenti {
+        grid-template-areas: home__container-documenti;
+        border: 1px solid #f00;
+    }
+
+    .home__container-estero {
+        grid-template-areas: home__container-estero;
+        border: 1px solid #f00;
+    }
+
+}
