@@ -1,4 +1,9 @@
 // Link
+.link-no-style {
+    text-decoration: none;
+    color: $black;
+}
+
 .link-effect-load {
     display: inline-block;
     position: relative;
@@ -41,4 +46,37 @@
         transition: transform 0.25s ease-out;
     }
 
+}
+
+// Buttons
+.button {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: $black;
+    padding: 1.5rem;
+    border-radius: 5px;
+    border: 2px solid $black;
+    transition: all .5s;
+
+    &--black {
+        color: $white;
+        background-color: $black;
+        border-color: $yellow-logo;
+
+        &:hover {
+            color: $black;
+            background-color: $yellow-logo;
+            border-color: $brown-logo;
+        }
+    }
+
+    &--yellow {
+        background-color: $yellow-logo;
+
+        &:hover {
+            color: $white;
+            background-color: $black;
+            border-color: $yellow-logo;
+        }
+    }
 }
