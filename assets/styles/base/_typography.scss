@@ -59,6 +59,10 @@
 // H tags
 .h2 {
     font-size: 5rem;
+
+    @include respond(sm) {
+        font-size: 4rem;
+    }
 }
 
 .h3 {

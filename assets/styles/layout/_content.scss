@@ -1,0 +1,26 @@
+.content {
+    width: 95%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+    "content__main content__sidebar";
+    border: 1px solid #00f;
+
+    @include respond(lg) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "content__main"
+        "content__sidebar";
+    }
+}
+
+.content__main {
+    grid-area: content__main;
+    border: 1px solid #00f;
+}
+
+.content__sidebar {
+    grid-area: content__sidebar;
+    border: 1px solid #00f;
+}
