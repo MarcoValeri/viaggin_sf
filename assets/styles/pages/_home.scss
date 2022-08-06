@@ -1,5 +1,6 @@
 .home {
     
+    // Main container
     &__main {
         width: 90%;
         margin: auto;
@@ -20,16 +21,15 @@
         padding: 2rem;
         margin: 2rem 4rem;
         text-align: center;
+        transition: transform .8s;
         border: 1px solid #f00;
 
         &:hover {
-            transition: transform .5s;
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
     }
 
     &__category-title {
-        font-size: 5rem;
         margin-bottom: 2rem;
     }
 
@@ -39,19 +39,47 @@
     }
 
     &__container-viaggi {
-        
+        background-image: linear-gradient(
+            to bottom right,
+            rgba(247, 247, 247, 0.8),
+            rgba(255, 211, 73, 0.8)
+        );
     }
 
     &__container-eventi {
-
+        background-image: linear-gradient(
+            to bottom left,
+            rgba(247, 247, 247, 0.8),
+            rgba(255, 120, 90, 0.8)
+        );
     }
 
     &__container-documenti {
-
+        background-image: linear-gradient(
+            to top right,
+            rgba(247, 247, 247, 0.8),
+            rgba(255, 120, 90, 0.8)
+        );
     }
 
     &__container-estero {
+        background-image: linear-gradient(
+            to top left,
+            rgba(247, 247, 247, 0.8),
+            rgba(255, 211, 73, 0.8)
+        );
+    }
 
+    // Last articles container
+    &__container-articles {
+        width: 90%;
+        margin: 5rem auto;
+        border: 1px solid #f00;
+    }
+
+    &__container-title {
+        text-align: center;
+        margin-bottom: 5rem;
     }
 
 }

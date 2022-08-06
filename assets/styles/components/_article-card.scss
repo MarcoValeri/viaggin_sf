@@ -1,0 +1,30 @@
+.article-card {
+    width: 80rem;
+    height: 20rem;
+    padding: 1rem;
+    transition: transform .8s;
+    border: 1px solid #f00;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &__container-title {
+        margin-bottom: 1rem;
+    }
+
+    &__container-data {
+        margin-bottom: 1rem;
+    }
+
+    &__data {
+        color: $grey-light;
+    }
+
+    &__img {
+        width: 15rem;
+        float: left;
+        margin: 0 1rem .5rem 0;
+    }
+
+}

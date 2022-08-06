@@ -1,3 +1,70 @@
+// body tags
+.body-1 {
+    font-size: 2.2rem;
+}
+
+.body-2 {
+    font-size: 2rem;
+}
+
+.body-3 {
+    font-size: 1.8rem;
+}
+
+.body-4 {
+    font-size: 1.6rem;
+}
+
+.body-5 {
+    font-size: 1.4rem;
+}
+
+.body-6 {
+    font-size: 1.2rem;
+}
+
+// Buttons
+.button {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: $black;
+    padding: 1.5rem;
+    border-radius: 5px;
+    border: 2px solid $black;
+    transition: all .5s;
+
+    &--black {
+        color: $white;
+        background-color: $black;
+        border-color: $yellow-logo;
+
+        &:hover {
+            color: $black;
+            background-color: $yellow-logo;
+            border-color: $brown-logo;
+        }
+    }
+
+    &--yellow {
+        background-color: $yellow-logo;
+
+        &:hover {
+            color: $white;
+            background-color: $black;
+            border-color: $yellow-logo;
+        }
+    }
+}
+
+// H tags
+.h2 {
+    font-size: 5rem;
+}
+
+.h3 {
+    font-size: 3rem;
+}
+
 // Link
 .link-no-style {
     text-decoration: none;
@@ -46,37 +113,4 @@
         transition: transform 0.25s ease-out;
     }
 
-}
-
-// Buttons
-.button {
-    font-size: 1.8rem;
-    text-decoration: none;
-    color: $black;
-    padding: 1.5rem;
-    border-radius: 5px;
-    border: 2px solid $black;
-    transition: all .5s;
-
-    &--black {
-        color: $white;
-        background-color: $black;
-        border-color: $yellow-logo;
-
-        &:hover {
-            color: $black;
-            background-color: $yellow-logo;
-            border-color: $brown-logo;
-        }
-    }
-
-    &--yellow {
-        background-color: $yellow-logo;
-
-        &:hover {
-            color: $white;
-            background-color: $black;
-            border-color: $yellow-logo;
-        }
-    }
 }
