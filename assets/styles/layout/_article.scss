@@ -1,0 +1,200 @@
+/**
+* I have not followed BEM methodology
+* in some parts of the articles because
+* I want strict rules for
+* <h2>
+* <p>
+* <ol>
+* <ul>
+*/
+.article {
+
+    h2 {
+        font-size: 5rem;
+
+        @include respond(sm) {
+            font-size: 4rem;
+        }
+    }
+
+    h3 {
+        font-size: 3rem;
+    }
+
+    h4 {
+        font-size: 2.5rem;
+    }
+
+    ul,
+    ol {
+        margin-left: 5rem;
+
+        @include respond(md) {
+            margin-left: 2rem;
+        }
+    }
+
+    li {
+        font-size: 2rem;
+        line-height: 1.6;
+        padding-left: 1rem;
+    }
+
+    p {
+        font-size: 2rem;
+        line-height: 1.6;
+    }
+
+    &__title {
+        margin-bottom: 2rem;
+    }
+
+    &__data {
+        margin-left: 0 !important;
+        list-style: none;
+        margin-bottom: 2rem;
+    }
+
+    &__data-item {
+        color: $grey-light;
+        margin-bottom: .5rem;
+    }
+
+    &__index {
+        width: 80%;
+        margin: 5rem auto !important;
+        padding: 3rem;
+        border-radius: 5px;
+        border: 1px solid $grey-light;
+
+        &:hover {
+            border: 1px solid $red-link;
+        }
+
+        @include respond(md) {
+            padding: 3rem 1rem;
+        }
+    }
+
+    &__index-item {
+        margin-left: 5rem;
+
+        @include respond(md) {
+            margin-left: 3rem;
+        }
+    }
+
+    &__container-image {
+        margin: 3rem auto;
+        text-align: center;
+    }
+
+    &__img {
+        width: 60%;
+
+        @include respond(md) {
+            width: 90%;
+        }
+
+        @include respond(sm) {
+            width: 100%;
+        }
+    }
+}
+
+/*
+ * Style for the to do list.
+ */
+.list {
+    position: relative;
+    box-sizing: border-box;
+    background: #fff;
+    width: 100%;
+    border: 1px solid #123456;
+}
+
+.list h4 {
+    background: #123456;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.list ul {
+    position: relative;
+    padding: 2rem;
+}
+
+.list ul li {
+    position: relative;
+    list-style: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.list ul li:last-child {
+    border-bottom: none;
+}
+
+.list ul li label {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.list ul li label input {
+    visibility: hidden;
+    appearance: none;
+}
+
+.list ul li label p:first-letter {
+    text-transform: capitalize;
+}
+
+.list ul li label p {
+    position: absolute;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: #123456;
+}
+
+.list ul li label span {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list ul li label span:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    width: 10px;
+    height: 5px;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    transform: rotate(-40deg);
+}
+
+.list ul li label input:checked~p {
+    text-decoration: line-through;
+    color: #123456;
+}
+
+.list ul li label input:checked~span {
+    background: #123456;
+    border: 1px solid #123456;
+}
+
+.list ul li label input:checked~span::before {
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+/* END STYLE */
