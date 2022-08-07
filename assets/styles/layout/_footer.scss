@@ -1,0 +1,19 @@
+.footer {
+    height: 30rem;
+    padding: 0 2rem 5rem 2rem;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    background-color: $black;
+
+    &__container-content {
+        text-align: center;
+        color: $white;
+    }
+
+    &__heart {
+        font-size: 3.5rem;
+        color: $red;
+    }
+
+}

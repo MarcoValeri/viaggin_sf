@@ -43,8 +43,46 @@
                 {% block body %}{% endblock %}
             </main>
             <aside class="content__sidebar">
-                <h1>Sidebar</h1>
+                <div class="content__sidebar-content">
+                    <div class="content__sidebar-container-title">
+                        <h3 class="content__sidebar-title h4">Seguici su:</h3>
+                    </div>
+                    <ul class="content__sidebar-menu">
+                        <li class="content__sidebar-menu-item">
+                            <a class="link-no-style" href="https://www.facebook.com/marcovaleri.net" target="_blank">
+                                <img src="../images/facebook-icon.svg" alt="Facebook Icon">
+                            </a>
+                        </li>
+                        <li class="content__sidebar-menu-item">
+                            <a class="link-no-style" href="https://www.instagram.com/marco__valeri/" target="_blank">
+                                <img src="../images/facebook-icon.svg" alt="Instagram Icon">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content__sidebar-content">
+                    <div class="content__sidebar-container-title">
+                        <h3 class="content__sidebar-title h4">Ultimi articoli:</h3>
+                    </div>
+                    <ul class="content__sidebar-menu-list">
+                        <li class="content__sidebar-menu-item-list">
+                            <a class="link body-2" href="https://www.facebook.com/marcovaleri.net" target="_blank">
+                                Parchi di Roma: elenco dei migliori parchi da visitare
+                            </a>
+                        </li>
+                        <li class="content__sidebar-menu-item-list">
+                            <a class="link body-2" href="https://www.instagram.com/marco__valeri/" target="_blank">
+                                Parchi di Roma: elenco dei migliori parchi da visitare
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </aside>
         </div>
+        <footer class="footer">
+            <div class="footer__container-content">
+                <p class="body-3">Made with <span class="footer__heart">&hearts;</span> in London by Marco Valeri - &copy; {{ "now"|date("Y") }} - All rights reserved</p>
+            </div>
+        </footer>
     </body>
 </html>

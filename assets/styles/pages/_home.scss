@@ -1,26 +1,21 @@
 .home {
     
     // Main container
-    &__main {
-        border: 1px solid #f00;
-    }
-
     &__container-categories {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        border: 1px solid #f00;
     }
 
     &__container-category {
         width: 40rem;
         min-height: 30rem;
-        padding: 2rem;
-        margin: 2rem 4rem;
+        padding: 2rem 2rem 4rem 2rem;
+        margin: 1rem;
         text-align: center;
         transition: transform .8s;
-        border: 1px solid #f00;
+        border-radius: 5px;
 
         &:hover {
             transform: scale(1.05);
@@ -84,7 +79,6 @@
     &__container-articles {
         width: 90%;
         margin: 5rem auto;
-        border: 1px solid #f00;
     }
 
     &__container-title {
