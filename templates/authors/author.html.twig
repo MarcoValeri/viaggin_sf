@@ -1,33 +1,28 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <section class="home__main">
-        <div class="home__container-categories">
-            <div class="home__container-category home__container-viaggi">
-                <h2 class="home__category-title h2">Viaggi</h2>
-                <p class="home__category-description body-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, exercitationem esse? Repudiandae similique, dignissimos consectetur maxime explicabo exercitationem ipsam mollitia! Quae necessitatibus ratione iure minus quam dolorum non amet praesentium!</p>
-                <a class="button button--black" href="{{ path('app_category_viaggi') }}">Scopri di più</a>
-            </div>
-            <div class="home__container-category home__container-eventi">
-                <h2 class="home__category-title h2">Eventi</h2>
-                <p class="home__category-description body-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, exercitationem esse? Repudiandae similique, dignissimos consectetur maxime explicabo exercitationem ipsam mollitia! Quae necessitatibus ratione iure minus quam dolorum non amet praesentium!</p>
-                <a class="button button--black" href="{{ path('app_category_eventi') }}">Scopri di più</a>
-            </div>
-            <div class="home__container-category home__container-documenti">
-                <h2 class="home__category-title h2">Documenti</h2>
-                <p class="home__category-description body-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, exercitationem esse? Repudiandae similique, dignissimos consectetur maxime explicabo exercitationem ipsam mollitia! Quae necessitatibus ratione iure minus quam dolorum non amet praesentium!</p>
-                <a class="button button--black" href="{{ path('app_category_documenti') }}">Scopri di più</a>
-            </div>
-            <div class="home__container-category home__container-estero">
-                <h2 class="home__category-title h2">Vivere all'estero</h2>
-                <p class="home__category-description body-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, exercitationem esse? Repudiandae similique, dignissimos consectetur maxime explicabo exercitationem ipsam mollitia! Quae necessitatibus ratione iure minus quam dolorum non amet praesentium!</p>
-                <a class="button button--black" href="{{ path('app_category_estero') }}">Scopri di più</a>
-            </div>
+    <section class="author">
+        <div class="author-card">
+            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
+                <div class="author-card__container-title">
+                    <h2 class="h3">Marco Valeri</h2>
+                </div>
+                <div class="author-card__container-content">
+                    <p class="author-card__paragraph body-2">
+                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
+                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
+                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
+                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
+                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
+                        Oggi lavoro a Londra come Software Engineer
+                    </p>
+                </div>
+            </a>
         </div>
     </section>
-    <section class="home__container-articles">
-        <div class="home__container-title">
-            <h2 class="h2">Ultimi Articoli</h2>
+    <section class="author__container-articles">
+        <div class="author__container-title">
+            <h2 class="h2">Tutti gli articoli di Marco Valeri</h2>
         </div>
         <div class="article-card">
             <a href="{{ path('app_article') }}" class="article-card__link link-no-style">
@@ -98,7 +93,7 @@
             </a>
         </div>
         <div class="article-card">
-            <a href="{{ path('app_article') }}" class="link-no-style">
+            <a href="{{ path('app_article') }}" class="article-card__link link-no-style">
                 <div class="article-card__container-title">
                     <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
                 </div>

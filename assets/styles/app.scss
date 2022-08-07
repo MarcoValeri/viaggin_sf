@@ -8,9 +8,12 @@
 
 // Include components files
 @import './components/article-card';
+@import './components/author-card';
+@import './components/comment-card';
 
 // Include layout files
 @import './layout/article';
+@import './layout/author';
 @import './layout/category';
 @import './layout/content';
 @import './layout/footer';

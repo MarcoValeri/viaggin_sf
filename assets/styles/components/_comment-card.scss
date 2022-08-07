@@ -1,4 +1,4 @@
-.article-card {
+.comment-card {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -6,7 +6,6 @@
     height: 25rem;
     margin: 2rem auto;
     padding: 1rem;
-    transition: transform .8s;
     border-radius: 5px;
     border: 1px solid $grey-light;
 
@@ -23,10 +22,6 @@
         margin: 5rem auto;
     }
 
-    &:hover {
-        transform: scale(1.05);
-    }
-
     &__container-title {
         margin-bottom: 1rem;
     }
@@ -37,12 +32,6 @@
 
     &__data {
         color: $grey-light;
-    }
-
-    &__img {
-        width: 15rem;
-        float: left;
-        margin: 0 1rem .5rem 0;
     }
 
 }
