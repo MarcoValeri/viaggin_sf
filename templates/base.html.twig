@@ -39,10 +39,10 @@
                         <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/vivere-estero" ? 'link-mark' : '' }}" href="{{ path('app_category_estero') }}">Vivere all'estero</a>
                     </li>
                     <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/chi-siamo" ? 'link-mark' : '' }}" href="{{ path('app_home') }}" href="#">Chi siamo</a>
+                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/chi-siamo" ? 'link-mark' : '' }}" href="{{ path('app_about-us') }}">Chi siamo</a>
                     </li>
                     <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/contatti" ? 'link-mark' : '' }}" href="{{ path('app_home') }}" href="#">Contatti</a>
+                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/contatti" ? 'link-mark' : '' }}" href="{{ path('app_contact') }}">Contatti</a>
                     </li>
                 </ul>
             </nav>
