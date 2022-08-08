@@ -1,11 +1,29 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <section class="contact">
-        <div class="contact__container-content">
-            <h1 class="h1">ViaggIn Contatti </h1>
-            <p>&nbsp;</p>
-            <p class="body-2">Per qualsiasi comunicazione è possibile comunicare con lo staff di <em>ViaggIn</em> compilando il seguente form.</p>
-        </div>
+    <section class="contact">         
+        {{ form_start(contactForm) }}
+            <div class="contact__grid">
+                <div class="contact__container-title">
+                    <h1 class="h1">ViaggIn Contatti </h1>
+                    <p class="body-2">Per qualsiasi comunicazione è possibile comunicare con lo staff di <em>ViaggIn</em> compilando il seguente form.</p>
+                </div>
+                <div class="contact__container-name contact__input">
+                    {{ form_row(contactForm.name) }}
+                </div>
+                <div class="contact__container-surname contact__input">
+                    {{ form_row(contactForm.surname) }}
+                </div>
+                <div class="contact__container-email contact__input">
+                    {{ form_row(contactForm.email) }}
+                </div>
+                <div class="contact__container-message contact__input">
+                    {{ form_row(contactForm.message) }}
+                </div>
+                <div class="contact__container-submit contact__input">
+                    {{ form_row(contactForm.submit) }}
+                </div>
+            </div>
+        {{ form_end(contactForm) }}
     </section>
 {% endblock %}
