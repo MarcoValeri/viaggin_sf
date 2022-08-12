@@ -1,4 +1,8 @@
 .contact {
+
+    &__container-title {
+        margin-bottom: 2rem;
+    }
     
     &__grid {
         display: grid;
@@ -7,7 +11,80 @@
         "contact__container-name contact__container-surname"
         "contact__container-email contact__container-email"
         "contact__container-message contact__container-message"
+        "contact__container-privacy contact__container-privacy"
         "contact__container-submit contact__container-submit";
+        border: 1px solid #f00;
+    }
+
+    &__container-name {
+        grid-area: contact__container-name;
+        border: 1px solid #f00;
+        
+    }
+
+    &__container-surname {
+        grid-area: contact__container-surname;
+        border: 1px solid #f00;
+    }
+
+    &__container-email {
+        grid-area: contact__container-email;
+        border: 1px solid #f00;
+    }
+
+    &__container-message {
+        grid-area: contact__container-message;
+        border: 1px solid #f00;
+    }
+
+    &__container-privacy {
+        grid-area: contact__container-privacy;
+        border: 1px solid #f00;
+    }
+
+    &__container-submit {
+        grid-area: contact__container-submit;
+        border: 1px solid #f00;
+    }
+
+    // Style the inputs
+    input[type=text],
+    input[type=email] {
+        width: 50%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        margin: 2rem 0rem;
+        transition: all .5s;
+        border-radius: 5px;
+        border: none;
+        outline: 2px solid #000;
+
+        &:focus {
+            width: 90%;
+            border: none;
+            outline: 2px solid $green;
+        }
+    }
+
+    textarea {
+        width: 50%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        margin: 2rem 0rem;
+        transition: all .5s;
+        border-radius: 5px;
+        border: none;
+        outline: 2px solid #000;
+
+        &:focus {
+            width: 90%;
+            border: none;
+            outline: 2px solid $green;
+        }
+    }
+
+    &__button {
+        width: 20rem;
     }
 
 }

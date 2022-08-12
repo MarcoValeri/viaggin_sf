@@ -21,7 +21,7 @@ class ContactForm extends AbstractType {
         $builder
             ->add('name', TextType::class,
                 [
-                    'label' => 'Nome *',
+                    'label'    => false,
                     'required' => true,
                     'constraints' =>
                         [
@@ -35,11 +35,12 @@ class ContactForm extends AbstractType {
                                 'pattern' => '/[a-zA-Z]/',
                                 'message' => 'Errore: inserire solo lettere'
                             ])
-                        ]
+                        ],
+                    'attr' => ['placeholder' => 'Nome *']
                     ])
             ->add('surname', TextType::class,
                 [
-                    'label' => 'Cognome *',
+                    'label' => false,
                     'required' => true,
                     'constraints' =>
                         [
@@ -53,17 +54,19 @@ class ContactForm extends AbstractType {
                                 'pattern' => '/[a-zA-Z]/',
                                 'message' => 'Errore: inserire solo lettere'
                             ])
-                        ]
+                            ],
+                        'attr' => ['placeholder' => 'Cognome *']
                     ])
             ->add('email', EmailType::class,
                 [
-                    'label' => 'Email *',
+                    'label' => false,
                     'required' => true,
-                    'invalid_message' => 'Errore: indirizzo email non valido'
+                    'invalid_message' => 'Errore: indirizzo email non valido',
+                    'attr' => ['placeholder' => 'Email *']
                 ])
             ->add('message', TextareaType::class,
                 [
-                    'label' => 'Messaggio *',
+                    'label' => false,
                     'required' => true,
                     'constraints' =>
                         [
@@ -73,7 +76,9 @@ class ContactForm extends AbstractType {
                                 'minMessage' => 'Messaggio è troppo corto, dovrebbe essere di almeno 10 caratteri',
                                 'maxMessage' => 'Messaggio è troppo lungo, dovrebbe essere di massimo 500 caratteri'
                             ])
-                        ]
+                        ],
+                    'attr' => ['placeholder' => 'Messaggio *']
+
                 ])
             ->add('privacy', TypeCheckboxType::class, [
                 'label'      => false,
@@ -81,7 +86,8 @@ class ContactForm extends AbstractType {
             ])
             ->add('submit', SubmitType::class,
                 [
-                    'label' => 'Invia'
+                    'label' => 'Invia',
+                    'attr'  => ['class' => 'contact__button button button--black']
                 ])
             ->getForm();
     }

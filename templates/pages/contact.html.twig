@@ -1,13 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <section class="contact">         
+    <section class="contact">
+        <div class="contact__container-title">
+            <h1 class="h1">ViaggIn Contatti </h1>
+            <p class="body-2">Per qualsiasi comunicazione è possibile comunicare con lo staff di <em>ViaggIn</em> compilando il seguente form.</p>
+        </div>     
         {{ form_start(contactForm) }}
             <div class="contact__grid">
-                <div class="contact__container-title">
-                    <h1 class="h1">ViaggIn Contatti </h1>
-                    <p class="body-2">Per qualsiasi comunicazione è possibile comunicare con lo staff di <em>ViaggIn</em> compilando il seguente form.</p>
-                </div>
                 <div class="contact__container-name contact__input">
                     {{ form_row(contactForm.name) }}
                 </div>
@@ -20,7 +20,7 @@
                 <div class="contact__container-message contact__input">
                     {{ form_row(contactForm.message) }}
                 </div>
-                <div class="contact__container-submit contact__input">
+                <div class="contact__container-privacy contact__input">
                     {{ form_row(contactForm.privacy) }}
                     <label for="contact_form_privacy">Test</label>
                 </div>
