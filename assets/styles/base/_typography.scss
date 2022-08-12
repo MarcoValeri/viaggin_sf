@@ -38,6 +38,7 @@
     border-radius: 5px;
     border: 2px solid $black;
     transition: all .5s;
+    cursor: pointer;
 
     &--black {
         color: $white;
@@ -58,6 +59,15 @@
             color: $white;
             background-color: $black;
             border-color: $yellow-logo;
+        }
+    }
+
+    &--white {
+        background-color: $white;
+
+        &:hover {
+            color: $white;
+            background-color: $black;
         }
     }
 }

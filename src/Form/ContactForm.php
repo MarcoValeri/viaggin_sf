@@ -81,13 +81,13 @@ class ContactForm extends AbstractType {
 
                 ])
             ->add('privacy', TypeCheckboxType::class, [
-                'label'      => false,
-                'required'   => true
+                'label'      => 'Accetto la Privacy Policy *',
+                'required'   => true,
             ])
             ->add('submit', SubmitType::class,
                 [
                     'label' => 'Invia',
-                    'attr'  => ['class' => 'contact__button button button--black']
+                    'attr'  => ['class' => 'contact__button button button--white']
                 ])
             ->getForm();
     }

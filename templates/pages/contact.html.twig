@@ -4,7 +4,7 @@
     <section class="contact">
         <div class="contact__container-title">
             <h1 class="h1">ViaggIn Contatti </h1>
-            <p class="body-2">Per qualsiasi comunicazione è possibile comunicare con lo staff di <em>ViaggIn</em> compilando il seguente form.</p>
+            <p class="body-2">Per qualsiasi comunicazione è possibile mettersi in contatto con lo staff di <em>ViaggIn</em> compilando il seguente form.</p>
         </div>     
         {{ form_start(contactForm) }}
             <div class="contact__grid">
@@ -21,8 +21,11 @@
                     {{ form_row(contactForm.message) }}
                 </div>
                 <div class="contact__container-privacy contact__input">
-                    {{ form_row(contactForm.privacy) }}
-                    <label for="contact_form_privacy">Test</label>
+                    {# {{ form_row(contactForm.privacy) }} #}
+                    {{ form_widget(contactForm.privacy) }}
+                    {{ form_label(contactForm.privacy, 'Accetto la privacy policy', { 
+                        'label_attr': {'class': 'contact__privacy-label' } 
+                        }) }}
                 </div>
                 <div class="contact__container-submit contact__input">
                     {{ form_row(contactForm.submit) }}

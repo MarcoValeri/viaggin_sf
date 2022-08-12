@@ -1,7 +1,7 @@
 .contact {
 
     &__container-title {
-        margin-bottom: 2rem;
+        margin-bottom: 5rem;
     }
     
     &__grid {
@@ -13,38 +13,85 @@
         "contact__container-message contact__container-message"
         "contact__container-privacy contact__container-privacy"
         "contact__container-submit contact__container-submit";
-        border: 1px solid #f00;
+        padding: 2rem 1rem;
+        border-radius: 5px;
+        border: 1px solid $grey-light;
+
+        @include respond(md) {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+            "contact__container-name"
+            "contact__container-surname"
+            "contact__container-email"
+            "contact__container-message"
+            "contact__container-privacy"
+            "contact__container-submit";
+        }
     }
 
     &__container-name {
         grid-area: contact__container-name;
-        border: 1px solid #f00;
+
+        @include respond(md) {
+            text-align: center;
+        }
         
     }
 
     &__container-surname {
         grid-area: contact__container-surname;
-        border: 1px solid #f00;
+
+        @include respond(md) {
+            text-align: center;
+        }
     }
 
     &__container-email {
         grid-area: contact__container-email;
-        border: 1px solid #f00;
+
+        @include respond(md) {
+            text-align: center;
+        }
     }
 
     &__container-message {
         grid-area: contact__container-message;
-        border: 1px solid #f00;
+
+        @include respond(md) {
+            text-align: center;
+        }
     }
 
     &__container-privacy {
         grid-area: contact__container-privacy;
-        border: 1px solid #f00;
+        margin-bottom: 2rem;
+
+        @include respond(md) {
+            text-align: center;
+        }
+    }
+
+    &__privacy-label {
+        font-size: 1.6rem;
+        cursor: pointer;
     }
 
     &__container-submit {
         grid-area: contact__container-submit;
-        border: 1px solid #f00;
+
+        @include respond(md) {
+            text-align: center;
+        }
+    }
+
+    // Errors
+    &__input div ul {
+        list-style: none;
+    }
+
+    &__input div ul li {
+        font-size: 1.6rem;
+        color: $red;
     }
 
     // Style the inputs
@@ -64,6 +111,21 @@
             border: none;
             outline: 2px solid $green;
         }
+
+        @include respond(md) {
+            width: 60%;
+        }
+    }
+
+    input[type=checkbox] {
+        -ms-transform: scale(2);
+        -moz-transform: scale(2);
+        -webkit-transform: scale(2);
+        -o-transform: scale(2);
+        transform: scale(2);
+        padding: 10px;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     textarea {
@@ -80,6 +142,10 @@
             width: 90%;
             border: none;
             outline: 2px solid $green;
+        }
+
+        @include respond(md) {
+            width: 60%;
         }
     }
 
