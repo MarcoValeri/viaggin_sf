@@ -1,0 +1,13 @@
+.breadcrumbs {
+    width: 90%;
+    text-align: left;
+
+    &__item {
+        color: $grey-light;
+    }
+
+    &__item-span {
+        font-size: 2rem;
+    }
+
+}

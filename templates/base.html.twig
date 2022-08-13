@@ -50,6 +50,25 @@
                 <div class="header__logo">
                     <img class="header__logo" src="../images/viaggin-logo.png" alt="Viaggin Logo">
                 </div>
+                <div class="breadcrumbs">
+                    {% if app.request.pathinfo == '/' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a></div>
+                    {% elseif app.request.pathinfo == '/category/viaggi' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_viaggi') }}">Viaggi</a></div>
+                    {% elseif app.request.pathinfo == '/category/eventi' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_eventi') }}">Eventi</a></div>
+                    {% elseif app.request.pathinfo == '/category/documenti' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_documenti') }}">Documenti</a></div>
+                    {% elseif app.request.pathinfo == '/category/vivere-estero' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_estero') }}">Vivere all'estero</a></div>
+                    {% elseif app.request.pathinfo == '/chi-siamo' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_about-us') }}">Chi Siamo</a></div>
+                    {% elseif app.request.pathinfo == '/contatti' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_contact') }}">Contatti</a></div>
+                    {% elseif app.request.pathinfo == '/contatti-conferma' %}
+                        <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_contact') }}">Contatti</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_contact_confirm') }}">Contatti Conferma</a></div>
+                    {% endif %}
+                </div>
             </div>
         </header>
         <div class="content">
