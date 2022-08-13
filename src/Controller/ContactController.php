@@ -39,7 +39,7 @@ class ContactController extends AbstractController {
 
             $emailMessage = wordwrap($emailMessage, 100);
 
-            mail("info@marcovaleri.net", "Contatti ViaggIn.com", $emailMessage);
+            // mail("info@marcovaleri.net", "Contatti ViaggIn.com", $emailMessage);
 
             return $this->redirectToRoute('app_contact_confirm');
 
@@ -51,7 +51,7 @@ class ContactController extends AbstractController {
     }
 
     /**
-     * Route("/contatti-conferma", name="app_contact_confirm")
+     * @Route("/contatti-conferma", name="app_contact_confirm")
      */
     public function contactConfirm() {
         return $this->render("pages/contact-confirm.html.twig");

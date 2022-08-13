@@ -1,0 +1,25 @@
+.contact-confirm {
+
+    &__title-sub {
+        margin-top: 5rem;
+    }
+
+    &__action-flex {
+        width: 100%;
+        height: auto;
+        min-height: 10rem;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 5rem;
+    }
+
+    &__action-flex-single {
+        width: 20rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+}
