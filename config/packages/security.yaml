@@ -19,6 +19,9 @@ security:
             form_login:
                 login_path: app_login_user
                 check_path: app_login_user
+            logout:
+                path: app_logout_user
+                target: app_login_user
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
