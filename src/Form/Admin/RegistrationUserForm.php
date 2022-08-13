@@ -16,10 +16,11 @@ class RegistrationUserForm extends AbstractType {
 
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Email* '
+                'label' => false,
+                'attr' => ['placeholder' => 'Email *']
             ])
             ->add('role', ChoiceType::class, [
-                'label'    => 'Role',
+                'label'    => false,
                 'choices'   => [
                     'ROLE_ADMIN'    => 'ROLE_ADMIN',
                     'ROLE_USER'     => 'ROLE_USER'
@@ -33,7 +34,11 @@ class RegistrationUserForm extends AbstractType {
                 'first_options' => ['label' => false, 'attr' => ['class' => 'registration-user__input-email user-data__grid-password', 'placeholder'   => 'Password *']],
                 'second_options' => ['label' => false, 'attr' => ['class' => 'registration-user__input-email user-data__grid-repeat-password', 'placeholder'   => 'Repeat Password *']],
             ])
-            ->add('register', SubmitType::class)
+            ->add('register', SubmitType::class,
+                [
+                    'label'     => 'Register',
+                    'attr'  => ['class' => 'contact__button button button--white']
+                ])
             ->getForm();
 
     }

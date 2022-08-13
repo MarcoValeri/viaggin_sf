@@ -1,0 +1,56 @@
+.registration-user {
+
+    &__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "registration-user__container-email"
+        "registration-user__container-role"
+        "registration-user__container-password"
+        "registration-user__container-submit";
+    }
+
+    .registration-user__container-email {
+        grid-area: registration-user__container-email;
+    }
+
+    .registration-user__container-role {
+        grid-area: registration-user__container-role;
+    }
+
+    .registration-user__container-password {
+        grid-area: registration-user__container-password;
+    }
+
+    .registration-user__container-submit {
+        grid-area: registration-user__container-submit;
+    }
+
+    // User input
+    input[type=text],
+    input[type=password],
+    input[type=email] {
+        width: 50%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        margin: 2rem 0rem;
+        transition: all .5s;
+        border-radius: 5px;
+        border: none;
+        outline: 2px solid #000;
+
+        &:focus {
+            width: 90%;
+            border: none;
+            outline: 2px solid $green;
+        }
+
+        @include respond(md) {
+            width: 60%;
+        }
+    }
+
+    select {
+        font-size: 2rem;
+    }
+
+}

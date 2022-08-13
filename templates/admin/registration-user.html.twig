@@ -1,1 +1,26 @@
-{{ form(registrationUserForm) }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="registration-user">
+        <div class="registration-user__grid">
+            {# {{ form(registrationUserForm) }} #}
+            {{ form_start(registrationUserForm) }}
+                <div class="registration-user__container-email">
+                    {{ form_row(registrationUserForm.email) }}
+                </div>
+                <div class="registration-user__container-role">
+                    {{ form_row(registrationUserForm.role) }}
+                </div>
+                <div class="registration-user__container-password">
+                    {{ form_row(registrationUserForm.password) }}
+                </div>
+                {# <div class="registration-user__container-password-repeat">
+                    {{ form_row(registrationUserForm) }}
+                </div> #}
+                <div class="registration-user__container-submit">
+                    {{ form_row(registrationUserForm.register) }}
+                </div>
+            {{ form_end(registrationUserForm) }}
+        </div>
+    </div>
+{% endblock %}

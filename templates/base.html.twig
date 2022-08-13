@@ -44,6 +44,11 @@
                     <li class="nav__item">
                         <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/contatti" ? 'link-mark' : '' }}" href="{{ path('app_contact') }}">Contatti</a>
                     </li>
+                    {% if is_granted('ROLE_ADMIN')  %}
+                        <li class="nav__item">
+                            <a class="link-effect-load" href="{{ path('app_admin') }}">Admin</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
             <div class="header__container">

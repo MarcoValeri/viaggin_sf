@@ -1,0 +1,47 @@
+.login-user {
+
+    &__grid {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+        "login-user__email"
+        "login-user__password"
+        "login-user__submit";
+    }
+
+    &__email {
+        grid-area: login-user__email;
+    }
+
+    &__password {
+        grid-area: login-user__password;
+    }
+
+    &__submit {
+        grid-area: login-user__submit;
+    }
+
+    // User input
+    input[type=text],
+    input[type=password] {
+        width: 50%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        margin: 2rem 0rem;
+        transition: all .5s;
+        border-radius: 5px;
+        border: none;
+        outline: 2px solid #000;
+
+        &:focus {
+            width: 90%;
+            border: none;
+            outline: 2px solid $green;
+        }
+
+        @include respond(md) {
+            width: 60%;
+        }
+    }
+
+}
