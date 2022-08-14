@@ -53,7 +53,7 @@
             </nav>
             <div class="header__container">
                 <div class="header__logo">
-                    <img class="header__logo" src="../images/viaggin-logo.png" alt="Viaggin Logo">
+                    <img class="header__logo" src="{{ asset('images/viaggin-logo.png') }}" alt="Viaggin Logo">
                 </div>
                 <div class="breadcrumbs">
                     {% if app.request.pathinfo == '/' %}
@@ -88,12 +88,12 @@
                     <ul class="content__sidebar-menu">
                         <li class="content__sidebar-menu-item">
                             <a class="link-no-style" href="https://www.facebook.com/marcovaleri.net" target="_blank">
-                                <img src="../images/facebook-icon.svg" alt="Facebook Icon">
+                                <img src="{{ asset('images/facebook-icon.svg') }}" alt="Facebook Icon">
                             </a>
                         </li>
                         <li class="content__sidebar-menu-item">
                             <a class="link-no-style" href="https://www.instagram.com/marco__valeri/" target="_blank">
-                                <img src="../images/facebook-icon.svg" alt="Instagram Icon">
+                                <img src="{{ asset('images/facebook-icon.svg') }}" alt="Instagram Icon">
                             </a>
                         </li>
                     </ul>

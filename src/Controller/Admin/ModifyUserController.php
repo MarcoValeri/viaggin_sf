@@ -29,7 +29,7 @@ class ModifyUserController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/user/{id}, name="app_admin_user")
+     * @Route("/admin/user/{id}", name="app_admin_user")
      */
     public function showUser(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface, UserRepository $userRepository, string $id, ManagerRegistry $doctrine) {
 
@@ -54,7 +54,7 @@ class ModifyUserController extends AbstractController {
             $user->setPassword(
                 $userPasswordHasherInterface->hashPassword($user, $getFormInputs['password'])
             );
-            $user->setRoles($getFormInputs['roles']);
+            $user->setRoles($getFormInputs['role']);
             $em->persist($user);
             $em->flush();
 

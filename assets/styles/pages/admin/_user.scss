@@ -1,0 +1,75 @@
+.user {
+
+    table,
+    td,
+    th {
+        border: 1px solid $black;
+    }
+
+    &__table {
+        width: 100%;
+        text-align: center;
+        margin: 2rem auto;
+        border-collapse: collapse;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "user__grid-title"
+        "user__grid-email"
+        "user__grid-roles"
+        "user__grid-password"
+        "user__grid-submit";
+    }
+
+    &__grid-title {
+        grid-area: user__grid-title;
+    }
+
+    &__grid-email {
+        grid-area: user__grid-email;
+    }
+
+    &__grid-roles {
+        grid-area: user__grid-roles;
+    }
+
+    &__grid-password {
+        grid-area: user__grid-password;
+    }
+
+    &__grid-submit {
+        grid-area: user__grid-submit;
+    }
+
+    // Style the inputs
+    input[type=password],
+    input[type=email] {
+        width: 50%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        margin: 2rem 0rem;
+        transition: all .5s;
+        border-radius: 5px;
+        border: none;
+        outline: 2px solid #000;
+
+        &:focus {
+            width: 90%;
+            border: none;
+            outline: 2px solid $green;
+        }
+
+        @include respond(md) {
+            width: 60%;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 1.6rem;
+    }
+
+}

@@ -44,7 +44,7 @@ class RegisterUserController extends AbstractController {
             $em->flush();
 
             // Regirect to the confirm page
-            return $this->redirect($this->generateUrl('app_home'));
+            return $this->redirect($this->generateUrl('app_login_user'));
 
         }
 

@@ -1,30 +1,28 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="users__title">
-        Users List
-    </div>
     <div class="users">
+        <h1 class="h1">Users List</h1>
         <table class="users__table">
             <tr>
-                <th class="users__table-head p">Id</th>
-                <th class="users__table-head p">Email</th>
-                <th class="users__table-head p">Roles</th>
-                <th class="users__table-head p">Edit</th>
+                <th class="users__table-head body-3">Id</th>
+                <th class="users__table-head body-3">Email</th>
+                <th class="users__table-head body-3">Roles</th>
+                <th class="users__table-head body-3">Edit</th>
             </tr>
-            {% if (users) %}
-                {% for user in users %}
+            {% if (getUsers) %}
+                {% for user in getUsers %}
                     <tr>
-                        <td class="users__table-item p">{{ user.id }}</td>
-                        <td class="users__table-item p">{{ user.email }}</td>
-                        <td class="users__table-item p">
+                        <td class="users__table-item body-3">{{ user.id }}</td>
+                        <td class="users__table-item body-3">{{ user.email }}</td>
+                        <td class="users__table-item body-3">
                             {% for role in user.getRoles %}
                                 {{ role }}<br>
                             {% endfor %}
                         </td>
                         <td class="users__table-item p">
                             <a href="{{ path('app_admin_user', {id: user.id }) }}">
-                                <button class="button">Edit</button>
+                                <button class="button button--white">Edit</button>
                             </a>
                         </td>
                     </tr>
