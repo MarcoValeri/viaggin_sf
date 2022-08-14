@@ -36,6 +36,10 @@ class ArticleCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'by_reference' => false,
                 ]),
+            AssociationField::new('author')
+                ->setFormTypeOptions([
+                    'by_reference' => true,
+                ]),
             CodeEditorField::new('content'),
         ];
     }

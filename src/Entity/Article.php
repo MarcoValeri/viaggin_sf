@@ -37,8 +37,9 @@ class Article
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'article')]
     private $category;
 
-    // #[ORM\Column(length: 255)]
-    // private ?string $tags = null;
+    #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'article')]
+    private $author;
+
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'article')]
     private $tags;
 
@@ -136,6 +137,18 @@ class Article
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
