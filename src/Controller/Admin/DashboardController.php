@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Entity\Author;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Image;
 use App\Entity\Tag;
 
@@ -61,6 +62,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Users');
         yield MenuItem::linkToUrl('Create User', 'fa-solid fa-face-smile', $this->generateUrl('app_registration_user'));
         yield MenuItem::linkToUrl('Edit Users', 'fa-solid fa-users', $this->generateUrl('app_admin_users'));
+        yield MenuItem::section('Comments');
+        yield MenuItem::linkToCrud('Comments', 'fa fa-comment', Comment::class);
     }
 
     /**

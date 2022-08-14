@@ -40,6 +40,9 @@ class Article
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'article')]
     private $author;
 
+    #[ORM\ManyToOne(targetEntity: Comment::class, inversedBy: 'comment')]
+    private $comment;
+
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'article')]
     private $tags;
 
@@ -149,6 +152,18 @@ class Article
     public function setAuthor(?Author $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
