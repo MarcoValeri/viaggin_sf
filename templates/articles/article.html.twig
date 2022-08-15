@@ -1,7 +1,39 @@
 {% extends "base.html.twig" %}
 
+{% block title %}
+    {% for article in getArticles %}
+        {% if slug == article.url %}
+            <title>{{ article.title|raw }}</title>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block description %}
+    {% for article in getArticles %}
+        {% if slug == article.url %}
+            <meta name="Description" CONTENT="{{ article.description|raw }}">
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
 {% block body %}
-    <article class="article">
+    {% set break = false %}
+    {% set notFound = true %}
+    {% for article in getArticles %}
+        {% if slug == article.url %}
+            <h1 class="h1">{{ article.title }}</h1>
+            {% set break = true %}
+            {% set notFound = false %}
+        {% endif %}
+    {% endfor %}
+    {% if break == false and notFound == true %}
+        <h1 class="h1">Redirect to 404 page</h1>
+    {% set notFound = false %}
+    {% endif %}
+
+
+
+    {# <article class="article">
         <h1 class="article__title h1">Autunno in montagna: dove andare? 8 mete autunnali</h1>
         <ul class="article__data">
             <li class="article__data-item body-3">Autore: Marco Valeri</li>
@@ -530,5 +562,5 @@
                 </p>
             </div>
         </div>
-    </section>
+    </section> #}
 {% endblock %}
