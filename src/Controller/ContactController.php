@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContactController extends AbstractController {
 
-    /**
-     * @Route("/contatti", name="app_contact")
-     */
+    #[Route('/contatti', name: 'app_contact', priority: 1)]
     public function contact(Request $request) {
 
         /**
@@ -50,9 +48,7 @@ class ContactController extends AbstractController {
         ]);
     }
 
-    /**
-     * @Route("/contatti-conferma", name="app_contact_confirm")
-     */
+    #[Route('/contatti-conferma', name: 'app_contact_confirm', priority: 1)]
     public function contactConfirm() {
         return $this->render("pages/contact-confirm.html.twig");
     }
