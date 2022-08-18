@@ -84,6 +84,14 @@
         }
     }
 
+    &__container-author {
+        margin-bottom: 5rem;
+    }
+
+    &__comments-title {
+        text-align: center;
+    }
+
     &__container-image {
         margin: 3rem auto;
         text-align: center;
@@ -91,6 +99,7 @@
 
     &__img {
         width: 60%;
+        margin-bottom: 2rem;
 
         @include respond(md) {
             width: 90%;
@@ -101,12 +110,8 @@
         }
     }
 
-    &__container-author {
-        margin-bottom: 5rem;
-    }
-
-    &__comments-title {
-        text-align: center;
+    &__container-taxonomi {
+        border: 1px solid #f00;
     }
 }
 

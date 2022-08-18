@@ -21,7 +21,32 @@
     {% set notFound = true %}
     {% for article in getArticles %}
         {% if slug == article.url %}
-            <h1 class="h1">{{ article.title }}</h1>
+            <article class="article">
+                <h1 class="article__title h1">{{ article.getTitle }}</h1>
+                <ul class="article__data">
+                    <li class="article__data-item body-3">Autore: {{ article.getAuthor }}</li>
+                    <li class="article__data-item body-3">Pubblicato il: {{ article.getDate|date('d-m-Y') }}</li>
+                    <li class="article__data-item body-3">Ultima modifica: {{ article.getUpdateAt|date('d-m-Y') }}</li>
+                    <li class="article__data-item body-3">Commenti: 66</li>
+                </ul>
+                {{ article.content | raw }}
+                <div class="article__container-image">
+                    <img class="article__img" src="../images/{{ article.getImage }}" alt="Valle di Ledro in Trentino ">
+                </div>
+                <div class="article__container-taxonomi">
+                    <ul class="list-no-style">
+                        <li class="list-no-style__item">
+                            <span class="body-4">Categoria:</span> <a href="#" class="link body-4">{{ article.getCategory }}</a>
+                        </li>
+                        <li class="list-no-style__item">
+                            {{ (article.getTags|length == 1) ? '<span class="body-4">Tag:</span>' : '<span class="body-4">Tags:</span>' }}
+                            {% for key, tag in article.getTags %}
+                                <a class="link body-4" href="#">{{ tag.name }}</a>{{ (key != article.getTags|length - 1) ? ',' : '' }}
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </div>
+            </article>
             {% set break = true %}
             {% set notFound = false %}
         {% endif %}
