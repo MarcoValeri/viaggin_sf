@@ -16,6 +16,23 @@
     {% endfor %}
 {% endblock %}
 
+{% block breadcrumbs %}
+    {% set articleTitle = 'New Test Article Title' %}
+    {% for article in getArticles %}
+        {% if slug == article.url %}
+            <div class="breadcrumbs">
+                <div class="breadcrumbs__container">
+                    <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+                    <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+                    <a class="breadcrumbs__item link-no-style body-4" href="#">{{ article.getCategory }}</a>
+                    <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+                    <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article', {'slug': article.url}) }}">{{ article.getTitle }}</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
 {% block body %}
     {% set break = false %}
     {% set notFound = true %}
