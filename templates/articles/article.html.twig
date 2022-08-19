@@ -24,7 +24,7 @@
                 <div class="breadcrumbs__container">
                     <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
                     <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-                    <a class="breadcrumbs__item link-no-style body-4" href="#">{{ article.getCategory }}</a>
+                    <a class="breadcrumbs__item link-no-style body-4" href="{{ article.getCategory.url }}">{{ article.getCategory }}</a>
                     <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
                     <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article', {'slug': article.url}) }}">{{ article.getTitle }}</a>
                 </div>

@@ -21,6 +21,10 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $url = null;
+
+
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'category')]
     private $article;
 
@@ -54,6 +58,18 @@ class Category
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
