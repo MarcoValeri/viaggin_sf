@@ -98,6 +98,10 @@
         {% else %}
             <p>String</p>
         {% endif %}
+        <h1>Form</h1>
+        {{ form_start(formComment) }}
+            {# {{ form_row(formComment.name) }} #}
+        {{ form_end(formComment) }}
     </section>
 
 
