@@ -40,8 +40,8 @@ class Article
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'article')]
     private $author;
 
-    #[ORM\ManyToOne(targetEntity: Comment::class, inversedBy: 'comment')]
-    private $comment;
+    #[ORM\ManyToMany(targetEntity: Comment::class, inversedBy: 'article')]
+    private $comments;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'article')]
     private $tags;
@@ -52,6 +52,7 @@ class Article
 
     public function __construct()
     {
+        $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -156,14 +157,33 @@ class Article
         return $this;
     }
 
-    public function getComment(): ?Comment
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
     {
-        return $this->comment;
+        return $this->comments;
     }
 
-    public function setComment(?Comment $comment): self
+    public function setComments(?Comment $comments): self
     {
-        $this->comment = $comment;
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
 
         return $this;
     }

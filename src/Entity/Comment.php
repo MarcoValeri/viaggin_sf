@@ -29,11 +29,11 @@ class Comment
     private ?string $content = null;
 
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'comment')]
-    private $article;
+    private $comment;
 
     public function __construct()
     {
-        $this->article = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,27 +92,26 @@ class Comment
     /**
      * @return Collection|Article[]
      */
-    public function getArticle(): Collection
+    public function getComment(): Collection
     {
-        return $this->article;
+        return $this->comment;
     }
 
-    public function addArticle(Article $article): self
+    public function addComment(Article $comment): self
     {
-        if (!$this->article->contains($article)) {
-            $this->article[] = $article;
-            $article->setComment($this);
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setComments($this);
         }
 
         return $this;
     }
 
-    public function removeArticle(Article $article): self
+    public function removeComment(Article $comment): self
     {
-        if ($this->article->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getComment() === $this) {
-                $article->setComment(null);
+        if ($this->comment->removeElement($comment)) {
+            if ($comment->getComments() === $this) {
+                $comment->setComments(null);
             }
         }
 

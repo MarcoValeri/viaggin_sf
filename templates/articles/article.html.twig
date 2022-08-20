@@ -12,6 +12,7 @@
 {% set articleCategory = '' %}
 {% set articleCategoryUrl = '' %}
 {% set articleTag = '' %}
+{% set articleComments = '' %}
 
 {% set break = false %}
 {% set notFound = true %}
@@ -29,6 +30,7 @@
         {% set articleCategory = article.getCategory %}
         {% set articleCategoryUrl = article.getCategory.url %}
         {% set articleTag = article.getTags %}
+        {% set articleComments = article.getComments %}
         {% set break = true %}
         {% set notFound = false %}
     {% endif %}
@@ -85,6 +87,18 @@
             </ul>
         </div>
     </article>
+    <section class="article__container-comments">
+        <h2>Commenti</h2>
+        {% for comment in articleComments %}
+            <p>{{ comment.getContent }}</p>
+        {% endfor %}
+        {# <p>{{ articleTag.getDescription }}</p> #}
+        {% if articleComments is iterable %}
+            <p>Arr</p>
+        {% else %}
+            <p>String</p>
+        {% endif %}
+    </section>
 
 
 
