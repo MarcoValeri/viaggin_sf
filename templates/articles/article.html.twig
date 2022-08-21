@@ -7,12 +7,14 @@
 {% set articleImage = '' %}
 {% set articleImageAlt = '' %}
 {% set articleAuthor = '' %}
+{% set articleAuthorImage = '' %}
 {% set articleDate = '' %}
 {% set articleUpdate = '' %}
 {% set articleCategory = '' %}
 {% set articleCategoryUrl = '' %}
 {% set articleTag = '' %}
 {% set articleComments = '' %}
+{% set articleCommentsNum = 0 %}
 
 {% set break = false %}
 {% set notFound = true %}
@@ -25,12 +27,14 @@
         {% set articleImage = article.getImage %}
         {% set articleImageAlt = article.getImage.title %}
         {% set articleAuthor = article.getAuthor %}
+        {% set articleAuthorImage = articleAuthor.image %}
         {% set articleDate = article.getDate|date('d-m-Y') %}
         {% set articleUpdate = article.getUpdateAt|date('d-m-Y') %}
         {% set articleCategory = article.getCategory %}
         {% set articleCategoryUrl = article.getCategory.url %}
         {% set articleTag = article.getTags %}
         {% set articleComments = article.getComments %}
+        {% set articleCommentsNum = articleComments|length %}
         {% set break = true %}
         {% set notFound = false %}
     {% endif %}
@@ -67,7 +71,9 @@
             <li class="article__data-item body-3">Autore: {{ articleAuthor }}</li>
             <li class="article__data-item body-3">Pubblicato il: {{ articleDate }}</li>
             <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate }}</li>
-            <li class="article__data-item body-3">Commenti: 66</li>
+            <li class="article__data-item body-3">
+                <a class="list-no-style__inherit-color" href="#article-container-comments">Commenti: {{ articleCommentsNum }}</a>
+            </li>
         </ul>
         {{ articleContent|raw }}
         <div class="article__container-image">
@@ -87,21 +93,73 @@
             </ul>
         </div>
     </article>
-    <section class="article__container-comments">
-        <h2>Commenti</h2>
-        {% for comment in articleComments %}
-            <p>{{ comment.getContent }}</p>
-        {% endfor %}
-        {# <p>{{ articleTag.getDescription }}</p> #}
-        {% if articleComments is iterable %}
-            <p>Arr</p>
-        {% else %}
-            <p>String</p>
-        {% endif %}
-        <h1>Form</h1>
-        {{ form_start(formComment) }}
-            {# {{ form_row(formComment.name) }} #}
+    <section class="article__container-author">
+        <h2 class="article__container-author-title h2">Articolo scritto da</h2>
+        <div class="author-card">
+            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
+                <div class="author-card__container-title">
+                    <h2 class="h3">{{ articleAuthor.name }}</h2>
+                </div>
+                <div class="author-card__container-content">
+                    <p class="author-card__paragraph body-2">
+                        <img class="author-card__img" src="../images/{{ articleAuthorImage }}" alt="Immagine dell'autorə {{ articleAuthor }}">
+                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
+                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
+                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
+                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
+                        Oggi lavoro a Londra come Software Engineer
+                    </p>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="article-container-comments" class="article__container-comments-form">
+        <h3 class="article__comments-sub-title h3">Lascia un commento</h3>
+        {{ form_start(formComment, {'action': '#article-container-comments'}) }}
+            <div class="article__form-comments-grid">
+                <div class="article__form-comments-name article__input">
+                    {{ form_row(formComment.name) }}
+                </div>
+                <div class="article__form-comments-email article__input">
+                    {{ form_row(formComment.email) }}
+                </div>
+                <div class="article__form-comments-comment article__input">
+                    {{ form_row(formComment.comment) }}
+                </div>
+                <div class="article__form-comments-privacy article__input">
+                    {{ form_widget(formComment.privacy) }}
+                    {{ form_label(formComment.privacy, 'Accetto la privacy policy', { 
+                        'label_attr': {'class': 'contact__privacy-label' } 
+                        }) }}
+                </div>
+                <div class="article__form-comments-submit article__input">
+                    {{ form_row(formComment.submit) }}
+                    <p class="body-3">Per maggiori informazioni consulta la <a href="#">Privacy Policy di ViaggIn</a></p>
+                </div>
+            </div>
         {{ form_end(formComment) }}
+    </section>
+    <section id="" class="article__container-comments">
+        <h2 class="article__comments-title h2">
+            {{ articleCommentsNum }} {{ (articleCommentsNum == 1) ? 'commento' : 'commenti' }}
+        </h2>
+        {% for comment in articleComments %}
+            {% if comment.approved %}
+                <div class="comment-card">
+                    <div class="comment-card__container-title">
+                        <h2 class="h3">{{ comment.name }}</h2>
+                    </div>
+                    <div class="comment-card__container-data">
+                        <span class="comment-card__data body-6">Pubblicato il {{ comment.getDate }} da {{ comment.name }}</span>
+                    </div>
+                    <div class="comment-card__container-content">
+                        <p class="comment-card__paragraph body-2">
+                            {{ comment.getContent }}
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </section>
 
 

@@ -2,10 +2,10 @@
 
 namespace App\Form;
 
-use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -26,7 +26,7 @@ class CommentForm extends AbstractType {
                 ])
             ->add('name', TextType::class,
                 [
-                    'label' => 'Nome *',
+                    'label' => false,
                     'required' => true,
                     'constraints' =>
                         [
@@ -40,17 +40,19 @@ class CommentForm extends AbstractType {
                                 'pattern' => '/[a-zA-Z]/',
                                 'message' => 'Errore: inserire solo lettere'
                             ])
-                        ]
+                        ],
+                    'attr' => ['placeholder' => 'Nome *']    
                     ])
             ->add('email', EmailType::class,
                 [
-                    'label' => 'Email *',
+                    'label' => false,
                     'required' => true,
-                    'invalid_message' => 'Errore: indirizzo email non valido'
+                    'invalid_message' => 'Errore: indirizzo email non valido',
+                    'attr' => ['placeholder' => 'Email *']
                 ])
             ->add('comment', TextareaType::class,
                 [
-                    'label' => 'Commento *',
+                    'label' => false,
                     'required' => true,
                     'constraints' =>
                         [
@@ -60,11 +62,18 @@ class CommentForm extends AbstractType {
                                 'minMessage' => 'Commento è troppo corto, dovrebbe essere di almeno 10 caratteri',
                                 'maxMessage' => 'Messaggio è troppo lungo, dovrebbe essere di massimo 1000 caratteri'
                             ])
-                        ]
+                        ],
+                    'attr' => ['placeholder' => 'Commento *']
+                ])
+            ->add('privacy', CheckboxType::class, 
+                [
+                    'label'      => 'Accetto la Privacy Policy *',
+                    'required'   => true,
                 ])
             ->add('submit', SubmitType::class,
                 [
-                    'label' => 'Invia'
+                    'label' => 'Invia',
+                    'attr'  => ['class' => 'article__form-button button button--white']
                 ])
             ->getForm();
 

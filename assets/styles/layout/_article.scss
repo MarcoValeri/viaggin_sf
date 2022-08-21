@@ -84,14 +84,6 @@
         }
     }
 
-    &__container-author {
-        margin-bottom: 5rem;
-    }
-
-    &__comments-title {
-        text-align: center;
-    }
-
     &__container-image {
         margin: 3rem auto;
         text-align: center;
@@ -108,6 +100,156 @@
         @include respond(sm) {
             width: 100%;
         }
+    }
+
+    &__container-taxonomi {
+        padding: 1rem .5rem;
+        margin-bottom: 5rem;
+        border: 1px solid $grey-light;
+        border-radius: 5px;
+    }
+
+    &__container-author {
+        margin-bottom: 5rem;
+    }
+
+    &__container-author-title {
+        text-align: center;
+    }
+
+    &__comments-sub-title {
+        margin-bottom: 2rem;
+    }
+
+    &__container-comments-form {
+        width: 90%;
+        padding: 1rem;
+        margin: 0 auto 5rem auto;
+        border: 1px solid $grey-light;
+        border-radius: 5px;
+    }
+
+    &__form-comments-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "article__form-comments-name article__form-comments-email"
+        "article__form-comments-comment article__form-comments-comment"
+        "article__form-comments-privacy article__form-comments-privacy"
+        "article__form-comments-submit article__form-comments-submit";
+
+        @include respond(md) {
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+            "article__form-comments-name"
+            "article__form-comments-email"
+            "article__form-comments-comment"
+            "article__form-comments-privacy"
+            "article__form-comments-submit";
+        }
+
+        /**
+        * Nested errors and
+        * inputs rules
+        * because grid is
+        * outside of article class
+        * on Twig file
+        */
+        // Errors
+        div ul {
+            list-style: none;
+        }
+
+        div ul li {
+            font-size: 1.6rem;
+            color: $red;
+        }
+
+        // Style the inputs
+        input[type=text],
+        input[type=email] {
+            width: 50%;
+            font-size: 1.8rem;
+            padding: 1rem;
+            margin: 2rem 0rem;
+            transition: all .5s;
+            border-radius: 5px;
+            border: none;
+            outline: 2px solid #000;
+
+            &:focus {
+                width: 90%;
+                border: none;
+                outline: 2px solid $green;
+            }
+
+            @include respond(md) {
+                width: 60%;
+            }
+        }
+
+        input[type=checkbox] {
+            -ms-transform: scale(2);
+            -moz-transform: scale(2);
+            -webkit-transform: scale(2);
+            -o-transform: scale(2);
+            transform: scale(2);
+            padding: 10px;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+    
+        textarea {
+            width: 50%;
+            height: auto;
+            min-height: 10rem;
+            font-size: 1.8rem;
+            padding: 1rem;
+            margin: 2rem 0rem;
+            transition: all .5s;
+            border-radius: 5px;
+            border: none;
+            outline: 2px solid #000;
+    
+            &:focus {
+                width: 90%;
+                border: none;
+                outline: 2px solid $green;
+            }
+    
+            @include respond(md) {
+                width: 60%;
+            }
+        }
+    }
+
+    &__form-comments-name {
+        grid-area: article__form-comments-name;
+    }
+
+    &__form-comments-email {
+        grid-area: article__form-comments-email;
+    }
+
+    &__form-comments-comment {
+        grid-area: article__form-comments-comment;
+    }
+
+    &__form-comments-privacy {
+        grid-area: article__form-comments-privacy;
+    }
+
+    &__form-comments-submit {
+        grid-area: article__form-comments-submit;
+    }
+
+    &__form-button {
+        margin: 2rem 0;
+    }
+
+    &__comments-title {
+        margin-bottom: 2rem;
+        text-align: center;
     }
 
 }

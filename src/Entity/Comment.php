@@ -31,6 +31,9 @@ class Comment
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'comment')]
     private $comment;
 
+    #[ORM\Column(type: 'boolean')]
+    private $approved = false;
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
@@ -114,6 +117,18 @@ class Comment
                 $comment->setComments(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getApproved(): bool
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(bool $approved): self
+    {
+        $this->approved = $approved;
 
         return $this;
     }

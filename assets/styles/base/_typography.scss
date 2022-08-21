@@ -113,6 +113,11 @@
     color: $black;
 }
 
+.list-no-style__inherit-color {
+    text-decoration: none;
+    color: inherit;
+}
+
 .link-effect-load {
     display: inline-block;
     position: relative;

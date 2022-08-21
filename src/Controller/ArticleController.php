@@ -48,6 +48,9 @@ class ArticleController extends AbstractController {
             $em->persist($newComment);
             $em->flush();
 
+            // Redirect for cleaning form data
+            return $this->redirectToRoute('app_article', ['slug' => $slug]);
+
         }
 
         // Save all the article into a variable
