@@ -48,6 +48,9 @@ class ArticleController extends AbstractController {
             $em->persist($newComment);
             $em->flush();
 
+            // Create successful message with addFlash that save it to sessione and it is able once
+            $this->addFlash('success', 'Commento inviato correttamente ed in fase di approvazione');
+
             // Redirect for cleaning form data
             return $this->redirectToRoute('app_article', ['slug' => $slug]);
 

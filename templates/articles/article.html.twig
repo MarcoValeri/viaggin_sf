@@ -115,6 +115,12 @@
     </section>
     <section id="article-container-comments" class="article__container-comments-form">
         <h3 class="article__comments-sub-title h3">Lascia un commento</h3>
+        <!-- Success message if form has been submitted -->
+        {% for message in app.flashes('success') %}
+            <div class="article__container-comments-success">
+                <p class="article__comments-success body-2">{{ message }}</p>
+            </div>
+        {% endfor %}
         {{ form_start(formComment, {'action': '#article-container-comments'}) }}
             <div class="article__form-comments-grid">
                 <div class="article__form-comments-name article__input">
