@@ -39,665 +39,165 @@
         {% set notFound = false %}
     {% endif %}
 {% endfor %}
-{% if break == false and notFound == true %}
-    {# <h1 class="h1">Redirect to 404 page</h1> #}
-{% set notFound = false %}
-{% endif %}
 
 {% block title %}
-    <title>{{ articleTitle|raw }}</title>
+    {% if break == false and notFound == true %}
+        <title>ViaggIn: error 404, pagina non trovata</title>
+    {% else %}
+        <title>{{ articleTitle|raw }}</title>
+    {% endif %}
 {% endblock %}
 
 {% block description %}
-    <meta name="Description" CONTENT="{{ articleDescription|raw }}">
+    {% if break == false and notFound == true %}
+        <meta name="Description" CONTENT="ViaggIn Error 404, page not found">
+    {% else %}
+        <meta name="Description" CONTENT="{{ articleDescription|raw }}">
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
-    <div class="breadcrumbs">
-        <div class="breadcrumbs__container">
-            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
-            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-            <a class="breadcrumbs__item link-no-style body-4" href="{{ articleCategoryUrl }}">{{ articleCategory }}</a>
-            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article', {'slug': articleUrl}) }}">{{ articleTitle }}</a>
+    {% if break == true and notFound == false %}
+        <div class="breadcrumbs">
+            <div class="breadcrumbs__container">
+                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+                <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+                <a class="breadcrumbs__item link-no-style body-4" href="{{ articleCategoryUrl }}">{{ articleCategory }}</a>
+                <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article', {'slug': articleUrl}) }}">{{ articleTitle }}</a>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
-    <article class="article">
-        <h1 class="article__title h1">{{ articleTitle }}</h1>
-        <ul class="article__data">
-            <li class="article__data-item body-3">Autore: {{ articleAuthor }}</li>
-            <li class="article__data-item body-3">Pubblicato il: {{ articleDate }}</li>
-            <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate }}</li>
-            <li class="article__data-item body-3">
-                <a class="list-no-style__inherit-color" href="#article-container-comments">Commenti: {{ articleCommentsNum }}</a>
-            </li>
-        </ul>
-        {{ articleContent|raw }}
-        <div class="article__container-image">
-            <img class="article__img" src="../images/{{ articleImage }}" alt="{{ articleImageAlt }}">
+    {% if break == false and notFound == true %}
+        <div class="article__container-404">
+            <h1 class="h1">Errore 404</h1>
+            <p class="article__404-description body-2">Sembra che la pagina o l'articolo che stai cercando non esista.</p>
+            <div class="article__404-container-action">
+            <h3 class="h3">Cosa vuoi fare?</h3>
+            <div class="article__404-action-flex">
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_home') }}" class="button button--yellow">Home</a>
+                </div>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_viaggi') }}" class="button button--yellow">Viaggi</a>
+                </div>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_eventi') }}" class="button button--yellow">Eventi</a>
+                </div>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_documenti') }}" class="button button--yellow">Documenti</a>
+                </div>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_estero') }}" class="button button--yellow">Vivere all'estero</a>
+                </div>
+            </div>
         </div>
-        <div class="article__container-taxonomi">
-            <ul class="list-no-style">
-                <li class="list-no-style__item">
-                    <span class="body-4">Categoria:</span> <a href="{{ articleCategoryUrl }}" class="link body-4">{{ articleCategory }}</a>
-                </li>
-                <li class="list-no-style__item">
-                    {{ (articleTag|length == 1) ? '<span class="body-4">Tag:</span>' : '<span class="body-4">Tags:</span>' }}
-                    {% for key, tag in articleTag %}
-                        <a class="link body-4" href="#">{{ tag.name }}</a>{{ (key != articleTag|length - 1) ? ',' : '' }}
-                    {% endfor %}
+        </div>
+    {% else %}
+        <article class="article">
+            <h1 class="article__title h1">{{ articleTitle }}</h1>
+            <ul class="article__data">
+                <li class="article__data-item body-3">Autore: {{ articleAuthor }}</li>
+                <li class="article__data-item body-3">Pubblicato il: {{ articleDate }}</li>
+                <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate }}</li>
+                <li class="article__data-item body-3">
+                    <a class="list-no-style__inherit-color" href="#article-container-comments">Commenti: {{ articleCommentsNum }}</a>
                 </li>
             </ul>
-        </div>
-    </article>
-    <section class="article__container-author">
-        <h2 class="article__container-author-title h2">Articolo scritto da</h2>
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">{{ articleAuthor.name }}</h2>
-                </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/{{ articleAuthorImage }}" alt="Immagine dell'autorə {{ articleAuthor }}">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
-                </div>
-            </a>
-        </div>
-    </section>
-    <section id="article-container-comments" class="article__container-comments-form">
-        <h3 class="article__comments-sub-title h3">Lascia un commento</h3>
-        <!-- Success message if form has been submitted -->
-        {% for message in app.flashes('success') %}
-            <div class="article__container-comments-success">
-                <p class="article__comments-success body-2">{{ message }}</p>
+            {{ articleContent|raw }}
+            <div class="article__container-image">
+                <img class="article__img" src="../images/{{ articleImage }}" alt="{{ articleImageAlt }}">
             </div>
-        {% endfor %}
-        {{ form_start(formComment, {'action': '#article-container-comments'}) }}
-            <div class="article__form-comments-grid">
-                <div class="article__form-comments-name article__input">
-                    {{ form_row(formComment.name) }}
-                </div>
-                <div class="article__form-comments-email article__input">
-                    {{ form_row(formComment.email) }}
-                </div>
-                <div class="article__form-comments-comment article__input">
-                    {{ form_row(formComment.comment) }}
-                </div>
-                <div class="article__form-comments-privacy article__input">
-                    {{ form_widget(formComment.privacy) }}
-                    {{ form_label(formComment.privacy, 'Accetto la privacy policy', { 
-                        'label_attr': {'class': 'contact__privacy-label' } 
-                        }) }}
-                </div>
-                <div class="article__form-comments-submit article__input">
-                    {{ form_row(formComment.submit) }}
-                    <p class="body-3">Per maggiori informazioni consulta la <a href="#">Privacy Policy di ViaggIn</a></p>
-                </div>
+            <div class="article__container-taxonomi">
+                <ul class="list-no-style">
+                    <li class="list-no-style__item">
+                        <span class="body-4">Categoria:</span> <a href="{{ articleCategoryUrl }}" class="link body-4">{{ articleCategory }}</a>
+                    </li>
+                    <li class="list-no-style__item">
+                        {{ (articleTag|length == 1) ? '<span class="body-4">Tag:</span>' : '<span class="body-4">Tags:</span>' }}
+                        {% for key, tag in articleTag %}
+                            <a class="link body-4" href="#">{{ tag.name }}</a>{{ (key != articleTag|length - 1) ? ',' : '' }}
+                        {% endfor %}
+                    </li>
+                </ul>
             </div>
-        {{ form_end(formComment) }}
-    </section>
-    <section id="" class="article__container-comments">
-        <h2 class="article__comments-title h2">
-            {{ articleCommentsNum }} {{ (articleCommentsNum == 1) ? 'commento' : 'commenti' }}
-        </h2>
-        {% for comment in articleComments %}
-            {% if comment.approved %}
-                <div class="comment-card">
-                    <div class="comment-card__container-title">
-                        <h2 class="h3">{{ comment.name }}</h2>
+        </article>
+        <section class="article__container-author">
+            <h2 class="article__container-author-title h2">Articolo scritto da</h2>
+            <div class="author-card">
+                <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
+                    <div class="author-card__container-title">
+                        <h2 class="h3">{{ articleAuthor.name }}</h2>
                     </div>
-                    <div class="comment-card__container-data">
-                        <span class="comment-card__data body-6">Pubblicato il {{ comment.getDate }} da {{ comment.name }}</span>
-                    </div>
-                    <div class="comment-card__container-content">
-                        <p class="comment-card__paragraph body-2">
-                            {{ comment.getContent }}
+                    <div class="author-card__container-content">
+                        <p class="author-card__paragraph body-2">
+                            <img class="author-card__img" src="../images/{{ articleAuthorImage }}" alt="Immagine dell'autorə {{ articleAuthor }}">
+                            Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
+                            Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
+                            Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
+                            “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
+                            Oggi lavoro a Londra come Software Engineer
                         </p>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-    </section>
-
-
-
-    {# <article class="article">
-        <h1 class="article__title h1">Autunno in montagna: dove andare? 8 mete autunnali</h1>
-        <ul class="article__data">
-            <li class="article__data-item body-3">Autore: Marco Valeri</li>
-            <li class="article__data-item body-3">Pubblicato il: 04-08-2022</li>
-            <li class="article__data-item body-3">Ultima modifica: 04-08-2022</li>
-            <li class="article__data-item body-3">Commenti: 62</li>
-        </ul>
-        <p>In questo articolo ho deciso di parlarti dei parchi di Roma, un argomento che mi è molto caro e di cui non vedo l’ora di parlarti</p>
-        <p>Devi sapere che per quanto la fama della città eterna sia indubbiamente dovuta al suo ingente patrimonio artistico, i numerosi parchi e le ville storiche, rappresentano una parte importante dell’essenza della città.</p>
-        <p>Molte volte mi è capitato di camminare per i parchi di Roma, da quelli più grandi e famosi come Villa Borghese e Villa Torlonia, a quelli situati in aree più periferiche e, onestamente, ogni volta mi sono sentita sempre più fortunata a vivere in una città come Roma.</p>
-        <p>Credimi se ti dico che avere dei parchi nella propria città è una vera salvezza, sia per il divertimento garantito dei più piccoli, sia per noi adulti che spesso dopo una giornata di lavoro, sentiamo l’esigenza di ricongiungerci con la natura e staccare la mente da tutto.</p>
-        <p>Ad ogni modo non perdiamoci in chiacchiere, in questo articolo ti parlerò di tutti i parchi presenti a Roma e in provincia, ti parlerò della loro storia e delle meraviglie che racchiudono e, ovviamente, ti indicherò dove si trovano e come raggiungerli.</p>
-        <ol class="article__index">
-            <li class="article__index-item link">Autunno in montagna: dove andare?</li>
-            <li class="article__index-item link">Autunno in montagna: offerte e info</li>
-            <li class="article__index-item link">Autunno in montagna con i bambini</li>
-            <li class="article__index-item link">Autunno in montagna in Italia</li>
-        </ol>
-        <h2>Autunno in montagna: dove andare?</h2>
-        <p>&nbsp;</p>
-        <p><strong>1 - Valle di Ledro in Trentino</strong></p>
-        <p>A qualche chilometro dal Lago di Garda sorge la Valle di Ledro, in Trentino. </p>
-        <p>Cos’ha questa località di unico ed indimenticabile, tanto da aver destato la mia attenzione in questo articolo sulle 7 mete montane da raggiungere in autunno?</p>
-        <p>Ha catturato la mia attenzione perché l’atmosfera che si trova una volta arrivati in questa valle è magica.</p>
-        <p>Un lago bellissimo, delle rocce ed una fitta vegetazione accolgono il turista:</p>
-        <p>&nbsp;</p>
-        <h3 class="h3">Title with h3 tag</h3>
-        <p>appena arriva qui, il viaggiatore viene come catapultato all’interno della natura amica, nell’aria buona, tanto che l’autunno in Valle di Ledro è la stagione ideale da dedicare allo sport. </p>
-        <p>Sport che può intendersi come camminate lungo i sentieri adibiti ad hoc, ma anche un genere di attività più intensa, come il biking ed il parapendio.</p>
-        <p>E se si è lavorato tutta l’estate e si è quindi in cerca di riposo, questa località permette anche del sano relax.</p>
-        <p>&nbsp;</p>
-        <h4 class="h4">Title with H4 tag</h4>
-        <p>Sfido chiunque a non <a href="#" class="link">rilassarsi in mezzo a così tanta natura</a>, col rumore silenzioso delle montagne e con il verde che <em>sbraita per raggiungerlo</em>.</p>
-        <ul>
-            <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, nulla explicabo impedit quos facilis! Quo cum in qui facilis harum quisquam, architecto, dolorem tempora odit, obcaecati error blanditiis eum!</li>
-            <li>Hello World</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi dolore maxime, ducimus unde saepe maiores cupiditate quod numquam impedit. Blanditiis, unde consequuntur repudiandae nemo tempora accusamus. Natus quia corrupti quisquam.</li>
-        </ul>
-        <div class="article__container-image">
-            <img class="article__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Valle di Ledro in Trentino ">
-        </div>
-        <h2>Cosa portare in montagna: lista da spuntare</h2>
-        <p>&nbsp;</p>
-        <div class="list">
-            <h4>Lista valigia montgna</h4>
-            <ul>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Documenti</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Fotocopie dei documenti</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Autocertificazioni tipo Green Pass</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Biglietto aereo/treno</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Chiavi di casa</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Portafoglio</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Carta credito/debito</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Soldi</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Libro</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Abigliamento per la montagna</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Calzini massicci</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Biancheria intima</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Scarpe da trekking</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>t-shirts</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Pantaloni impermeabili</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Pantaloni normali</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Pantaloni corti</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Maglione</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Felpa</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Pigiama</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Ciabattine</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Sciarpa</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Foulard</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Cappello per il sole</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Cappello per il freddo</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Giubotto</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Dopo-scii</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Protezione solare</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Occhiali da sole</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Scarpe comode</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Sacco panni sporchi</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Saponetta di marsiglia</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Shampoo</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Bagnoschiuma</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Trucchi</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Pinzette</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Salviette per le mani</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Salviette struccanti</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Igenizzante tipo amuchina</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Smartphone</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Caricabatterie</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Macchina fotografica</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Auricolari</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Tablet</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Computer</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Spazzolino</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Dentifricio</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Deodorante</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Burrocacao</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Crema corpo</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Crema mani</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Spazzola per capelli</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Pettine</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Rasoio</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Medicinali indispensabili</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Asciugacapelli</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Asciugamano microfibra</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Adattatore prese</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Agenda</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Penna</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Orologio</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Alimenti</p>
-                        <span></span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        <p>Ombrello</p>
-                        <span></span>
-                    </label>
-                </li>
-            </ul>
-        </div>
-        <div class="article__container-image">
-            <img class="article__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Valle di Ledro in Trentino ">
-        </div>
-    </article>
-    <section class="article__container-author">
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">Marco Valeri</h2>
-                </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
-                </div>
-            </a>
-        </div>
-    </section>
-    <section class="article__container-comments">
-        <h4 class="article__comments-title h3">Commenti</h4>
-        <div class="comment-card">
-            <div class="comment-card__container-title">
-                <h2 class="h3">Autore commento</h2>
+                </a>
             </div>
-            <div class="comment-card__container-data">
-                <span class="comment-card__data body-6">Pubblicato il 24/06/2022 da Autore Commento</span>
-            </div>
-            <div class="comment-card__container-content">
-                <p class="comment-card__paragraph body-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                </p>
-            </div>
-        </div>
-    </section> #}
+        </section>
+        <section id="article-container-comments" class="article__container-comments-form">
+            <h3 class="article__comments-sub-title h3">Lascia un commento</h3>
+            <!-- Success message if form has been submitted -->
+            {% for message in app.flashes('success') %}
+                <div class="article__container-comments-success">
+                    <p class="article__comments-success body-2">{{ message }}</p>
+                </div>
+            {% endfor %}
+            {{ form_start(formComment, {'action': '#article-container-comments'}) }}
+                <div class="article__form-comments-grid">
+                    <div class="article__form-comments-name article__input">
+                        {{ form_row(formComment.name) }}
+                    </div>
+                    <div class="article__form-comments-email article__input">
+                        {{ form_row(formComment.email) }}
+                    </div>
+                    <div class="article__form-comments-comment article__input">
+                        {{ form_row(formComment.comment) }}
+                    </div>
+                    <div class="article__form-comments-privacy article__input">
+                        {{ form_widget(formComment.privacy) }}
+                        {{ form_label(formComment.privacy, 'Accetto la privacy policy', { 
+                            'label_attr': {'class': 'contact__privacy-label' } 
+                            }) }}
+                    </div>
+                    <div class="article__form-comments-submit article__input">
+                        {{ form_row(formComment.submit) }}
+                        <p class="body-3">Per maggiori informazioni consulta la <a href="#">Privacy Policy di ViaggIn</a></p>
+                    </div>
+                </div>
+            {{ form_end(formComment) }}
+        </section>
+        <section id="" class="article__container-comments">
+            <h2 class="article__comments-title h2">
+                {{ articleCommentsNum }} {{ (articleCommentsNum == 1) ? 'commento' : 'commenti' }}
+            </h2>
+            {% for comment in articleComments %}
+                {% if comment.approved %}
+                    <div class="comment-card">
+                        <div class="comment-card__container-title">
+                            <h2 class="h3">{{ comment.name }}</h2>
+                        </div>
+                        <div class="comment-card__container-data">
+                            <span class="comment-card__data body-6">Pubblicato il {{ comment.getDate }} da {{ comment.name }}</span>
+                        </div>
+                        <div class="comment-card__container-content">
+                            <p class="comment-card__paragraph body-2">
+                                {{ comment.getContent }}
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endif %}
 {% endblock %}
