@@ -25,11 +25,11 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[ORM\Column(type: 'datetimetz')]
+    private $date;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $update_at = null;
+    #[ORM\Column(type: 'datetimetz')]
+    private $update_at;
 
     #[ORM\ManyToOne(targetEntity: Image::class, inversedBy: 'article')]
     private $image;

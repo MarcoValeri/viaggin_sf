@@ -1,5 +1,14 @@
 {% extends "base.html.twig" %}
 
+{# 
+# Set up date variables.
+# Use seconds to compare date.
+# This date is +1hour to UK time
+# it is like Italy time
+#}
+{% set getDateToday = "now"|date('U') %}
+
+{# Set up empty variable for article content #}
 {% set articleTitle = '' %}
 {% set articleDescription = '' %}
 {% set articleUrl = '' %}
@@ -16,10 +25,12 @@
 {% set articleComments = '' %}
 {% set articleCommentsNum = 0 %}
 
+{# Flags variable that helps with 404 template #}
 {% set break = false %}
 {% set notFound = true %}
 {% for article in getArticles %}
     {% if slug == article.url %}
+        {# Set up article variavles #}
         {% set articleTitle = article.title %}
         {% set articleDescription = article.description %}
         {% set articleUrl = article.url %}
@@ -28,8 +39,8 @@
         {% set articleImageAlt = article.getImage.title %}
         {% set articleAuthor = article.getAuthor %}
         {% set articleAuthorImage = articleAuthor.image %}
-        {% set articleDate = article.getDate|date('d-m-Y') %}
-        {% set articleUpdate = article.getUpdateAt|date('d-m-Y') %}
+        {% set articleDate = article.getDate %}
+        {% set articleUpdate = article.getUpdateAt %}
         {% set articleCategory = article.getCategory %}
         {% set articleCategoryUrl = article.getCategory.url %}
         {% set articleTag = article.getTags %}
@@ -71,7 +82,14 @@
 {% endblock %}
 
 {% block body %}
-    {% if break == false and notFound == true %}
+    {# 
+    # If the article url exist
+    # and
+    # if current date is less than article data
+    # public it
+    # otherwise show 404 template
+    #}
+    {% if (break == false and notFound == true) or (getDateToday < articleDate|date('U')) %}
         <div class="article__container-404">
             <h1 class="h1">Errore 404</h1>
             <p class="article__404-description body-2">Sembra che la pagina o l'articolo che stai cercando non esista.</p>
@@ -101,8 +119,8 @@
             <h1 class="article__title h1">{{ articleTitle }}</h1>
             <ul class="article__data">
                 <li class="article__data-item body-3">Autore: {{ articleAuthor }}</li>
-                <li class="article__data-item body-3">Pubblicato il: {{ articleDate }}</li>
-                <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate }}</li>
+                <li class="article__data-item body-3">Pubblicato il: {{ articleDate|date('d-m-Y') }}</li>
+                <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate|date('d-m-Y') }}</li>
                 <li class="article__data-item body-3">
                     <a class="list-no-style__inherit-color" href="#article-container-comments">Commenti: {{ articleCommentsNum }}</a>
                 </li>
