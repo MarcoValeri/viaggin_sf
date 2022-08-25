@@ -19,5 +19,31 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Viaggin: tutti gli articoli</h1>
+    <section class="article-list">
+        <div class="article-list__container-title">
+            <h1 class="h1">Viaggin: tutti gli articoli</h1>
+        </div>
+        {% for key, article in getArticles|reverse %}
+            <div id="article-list" class="article-card">
+                <a href="{{ article.getUrl }}" class="article-card__link link-no-style">
+                    <div class="article-card__container-title">
+                        <h2 class="h3">{{ article.getTitle }}</h2>
+                    </div>
+                    <div class="article-card__container-data">
+                        <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('m/d/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
+                    </div>
+                    <div class="article-card__container-content">
+                        <div class="article-card__paragraph body-2">
+                            <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
+                            {% set articleContent = article.content|slice(0, 400) ~ '...' %}
+                            {{ articleContent|raw }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        <div class="article-list__container-load">
+            <a id="article-list-load-more" class="button button--yellow">Mostra altri articoli</a>
+        </div>
+    </section>
 {% endblock %}
