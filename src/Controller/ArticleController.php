@@ -13,6 +13,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AbstractController {
 
+    #[Route('articoli/viaggin-tutti-gli-articoli', name: 'app_article_list', priority: 1)]
+    public function articleList(ArticleRepository $articleRepository) {
+
+        // Save all the articles into a variable
+        $getArticles = $articleRepository->findAll();
+
+        return $this->render('articles/articles-list.html.twig', [
+            'getArticles'   => $getArticles
+        ]);
+
+    }
+
     #[Route('/{slug}', name: 'app_article', priority: 0)]
     public function article(ArticleRepository $articleRepository, Request $request, ManagerRegistry $doctrine, string $slug) {
 
@@ -56,7 +68,7 @@ class ArticleController extends AbstractController {
 
         }
 
-        // Save all the article into a variable
+        // Save all the articles into a variable
         $getArticles = $articleRepository->findAll();
 
         return $this->render('articles/article.html.twig', [

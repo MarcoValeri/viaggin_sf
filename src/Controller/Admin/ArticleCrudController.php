@@ -40,10 +40,6 @@ class ArticleCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'by_reference' => true,
                 ]),
-            AssociationField::new('comments')
-                ->setFormTypeOptions([
-                    'by_reference' => true,
-                ]),
             CodeEditorField::new('content')
         ];
     }

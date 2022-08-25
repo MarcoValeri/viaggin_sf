@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    <title>ViaggIn: tutti gli articoli</title>
+{% endblock %}
+
+{% block description %}
+    <meta name="Description" CONTENT="Add meta description">
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="breadcrumbs__container">
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article_list') }}">Viaggin: tutti gli articoli</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h1>Viaggin: tutti gli articoli</h1>
+{% endblock %}
