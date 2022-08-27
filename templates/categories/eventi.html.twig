@@ -21,90 +21,29 @@
         <div class="home__container-title">
             <h2 class="h2">Gli eventi di ViaggIn: tutti gli articoli</h2>
         </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
+        {% for key, article in getArticles|reverse %}
+            {% if key < 10 and article.getCategory() == 'Eventi' %}
+                <div class="article-card">
+                    <a href="{{ article.getUrl }}" class="article-card__link link-no-style">
+                        <div class="article-card__container-title">
+                            <h2 class="h3">{{ article.getTitle }}</h2>
+                        </div>
+                        <div class="article-card__container-data">
+                            <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('m/d/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
+                        </div>
+                        <div class="article-card__container-content">
+                            <div class="article-card__paragraph body-2">
+                                <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
+                                {% set articleContent = article.content|slice(0, 400) ~ '...' %}
+                                {{ articleContent|raw }}
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
+            {% endif %}
+        {% endfor %}
+        <div class="category__container-load">
+            <a href="{{ path('app_categories') }}" class="button button--yellow">Tutte le categorie</a>
         </div>
     </section>
 {% endblock %}

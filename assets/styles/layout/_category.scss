@@ -1,9 +1,5 @@
 .category {
 
-    &__container-categories {
-
-    }
-
     &__container-category {
         width: 80%;
         height: auto;
@@ -32,6 +28,15 @@
 
     &__category-description {
         margin-bottom: 4rem;
+    }
+
+    &__container-title {
+        text-align: center;
+    }
+
+    &__container-load {
+        text-align: center;
+        margin-top: 5rem;
     }
 
 }
