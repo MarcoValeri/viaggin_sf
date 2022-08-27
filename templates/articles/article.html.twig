@@ -113,7 +113,6 @@
                 </div>
             </div>
         </div>
-        </div>
     {% else %}
         <article class="article">
             <h1 class="article__title h1">{{ articleTitle }}</h1>
@@ -137,7 +136,7 @@
                     <li class="list-no-style__item">
                         {{ (articleTag|length == 1) ? '<span class="body-4">Tag:</span>' : '<span class="body-4">Tags:</span>' }}
                         {% for key, tag in articleTag %}
-                            <a class="link body-4" href="#">{{ tag.name }}</a>{{ (key != articleTag|length - 1) ? ',' : '' }}
+                            <a class="link body-4" href="{{ path('app_tag', {'slug': tag.url }) }}">{{ tag.name }}</a>{{ (key != articleTag|length - 1) ? ',' : '' }}
                         {% endfor %}
                     </li>
                 </ul>

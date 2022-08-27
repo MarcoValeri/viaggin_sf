@@ -24,7 +24,7 @@
         {% for key, article in getArticles|reverse %}
             {% if key < 10 and article.getCategory() == "Vivere all'estero" %}
                 <div class="article-card">
-                    <a href="{{ article.getUrl }}" class="article-card__link link-no-style">
+                    <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
                         <div class="article-card__container-title">
                             <h2 class="h3">{{ article.getTitle }}</h2>
                         </div>
