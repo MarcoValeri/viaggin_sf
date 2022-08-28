@@ -8,6 +8,16 @@
     <meta name="Description" CONTENT="ViaggIn: chi siamo? Blog e magazine di viaggi, eventi in Italia e all'estero, documenti per viaggiare e guide aggiornate per vivere e trasferirsi all'estero">
 {% endblock %}
 
+{% block data_structure %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Page",
+            "headline": "ViaggIn: chi siamo? Magazine e blog di viaggi ed eventi"
+        }
+    </script>
+{% endblock %}
+
 {% block body %}
     <section class="chi-siamo">
         <div class="chi-siamo__container-content">
@@ -36,7 +46,7 @@
                         </div>
                         <div class="author-card__container-content">
                             <div class="author-card__paragraph body-2">
-                                <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
+                                <img class="author-card__img" src="../images/{{ author.image }}" alt="Immagine dell'autore {{ author.name }}">
                                 {{ author.description }}
                             </div>
                         </div>

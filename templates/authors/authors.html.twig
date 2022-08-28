@@ -8,6 +8,16 @@
     <meta name="Description" CONTENT="ViaggIn: lista degli autori che scrivono gli articoli e le guide di viaggio, degli eventi, dei documenti per viaggiare e le news per vivere all'estero">
 {% endblock %}
 
+{% block data_structure %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Page",
+            "headline": "Lista di tutti gli autori che scrivo per ViaggIn"
+        }
+    </script>
+{% endblock %}
+
 {% block breadcrumbs %}
     <div class="breadcrumbs">
         <div class="breadcrumbs__container">
@@ -31,7 +41,7 @@
                     </div>
                     <div class="author-card__container-content">
                         <div class="author-card__paragraph body-2">
-                            <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
+                            <img class="author-card__img" src="../images/{{ author.image }}" alt="Immagine dell'autore {{ author.name }}">
                             {{ author.description }}
                         </div>
                     </div>

@@ -8,6 +8,16 @@
     <meta name="Description" CONTENT="ViaggIn: lista di tutti gli articoli di viaggio, degli eventi, dei documenti per viaggiare e le guide per vivere all'estero del blog e magazine ViaggIn">
 {% endblock %}
 
+{% block data_structure %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Page",
+            "headline": "ViaggIn: tutti gli articoli"
+        }
+    </script>
+{% endblock %}
+
 {% block breadcrumbs %}
     <div class="breadcrumbs">
         <div class="breadcrumbs__container">
@@ -26,7 +36,7 @@
         {% for key, article in getArticles|reverse %}
             {% if key < 10 %}
                 <div class="article-card">
-                    <a href="{{ article.getUrl }}" class="article-card__link link-no-style">
+                    <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
                         <div class="article-card__container-title">
                             <h2 class="h3">{{ article.getTitle }}</h2>
                         </div>

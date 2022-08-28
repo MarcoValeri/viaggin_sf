@@ -8,6 +8,16 @@
     <meta name="Description" CONTENT="ViaggIn: elenco completo di tutte le categorie del blog e magazine, quali viaggi, eventi nel mondo, documenti di viaggio e guide per viver all'estero">
 {% endblock %}
 
+{% block data_structure %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Page",
+            "headline": "ViaggIn: elenco e descrizione di tutte le categorie"
+        }
+    </script>
+{% endblock %}
+
 {% block body %}
     <section class="home__main">
         <div class="home__container-categories">

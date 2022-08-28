@@ -4,6 +4,7 @@
 {% set authorName = '' %}
 {% set authorDescription = '' %}
 {% set authorUrl = '' %}
+{% set authorImage = '' %}
 
 {# Flags variable that helps with 404 template #}
 {% set break = false %}
@@ -14,17 +15,46 @@
         {% set authorName = author.name %}
         {% set authorDescription = author.description %}
         {% set authorUrl = author.url %}
+        {% set authorImage = author.image %}
         {% set break = true %}
         {% set notFound = false %}
     {% endif %}
 {% endfor %}
 
 {% block title %}
-    <title>{{ authorName }} autore di ViaggIn</title>
+    {% if break == false and notFound == true %}
+        <title>ViaggIn: error 404, pagina non trovata</title>
+    {% else %}
+        <title>{{ authorName|raw }} autore di ViaggIn</title>
+    {% endif %}
 {% endblock %}
 
 {% block description %}
-    <meta name="Description" CONTENT="{{ authorDescription }}">
+    {% if break == false and notFound == true %}
+        <meta name="Description" CONTENT="ViaggIn Error 404, page not found">
+    {% else %}
+        <meta name="Description" CONTENT="{{ authorDescription|raw }}">
+    {% endif %}
+{% endblock %}
+
+{% block data_structure %}
+    {% if break == false and notFound == true %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Page",
+                "headline": "ViaggIn: error 404, pagina non trovata"
+            }
+        </script>
+    {% else %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Page",
+                "headline": "Autore {{ authorName }}"
+            }
+        </script>
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -78,7 +108,7 @@
                     </div>
                     <div class="author-card__container-content">
                         <div class="author-card__paragraph body-2">
-                            <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
+                            <img class="author-card__img" src="../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}">
                             {{ authorDescription }}
                         </div>
                     </div>

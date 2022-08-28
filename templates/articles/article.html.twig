@@ -67,6 +67,34 @@
     {% endif %}
 {% endblock %}
 
+{% block data_structure %}
+    {% if break == false and notFound == true %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Page",
+                "headline": "ViaggIn: error 404, pagina non trovata"
+            }
+        </script>
+    {% else %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Article",
+            "headline": "{{ articleTitle|raw }}"
+        },
+        {
+            "datePublished": "{{ articleDate|date('Y-m-d') }}",
+            "dateModified": "{{ articleUpdate|date('Y-m-d') }}",
+            "author" {
+                "@type": "Person",
+                "name": "{{ articleAuthor|raw }}",
+            },
+        }
+    </script>
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}
     {% if break == true and notFound == false %}
         <div class="breadcrumbs">

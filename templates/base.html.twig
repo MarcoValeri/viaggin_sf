@@ -10,6 +10,15 @@
             <meta name="Description" CONTENT="Viaggin è un blog di notizie relative ai viaggi, ai documenti utili per viaggiare, agli eventi nel mondo e un magazine di news per chi vivere all'estero">
         {% endblock %}
 
+        {% block data_structure %}
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "name": "Marco Valeri"
+            }
+            </script>
+        {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="../images/viaggin-logo.png">
         
         {% block stylesheets %}

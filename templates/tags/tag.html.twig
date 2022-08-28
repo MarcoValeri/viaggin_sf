@@ -23,7 +23,7 @@
     {% if break == false and notFound == true %}
         <title>ViaggIn: error 404, pagina non trovata</title>
     {% else %}
-        <title>{{ tagName|raw }}</title>
+        <title>Tag {{ tagName|raw }}</title>
     {% endif %}
 {% endblock %}
 
@@ -32,6 +32,26 @@
         <meta name="Description" CONTENT="ViaggIn Error 404, page not found">
     {% else %}
         <meta name="Description" CONTENT="{{ tagDescription|raw }}">
+    {% endif %}
+{% endblock %}
+
+{% block data_structure %}
+    {% if break == false and notFound == true %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Page",
+                "headline": "ViaggIn: error 404, pagina non trovata"
+            }
+        </script>
+    {% else %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Page",
+                "headline": "Tag {{ tagName|raw }}"
+            }
+        </script>
     {% endif %}
 {% endblock %}
 
