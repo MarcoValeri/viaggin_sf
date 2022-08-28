@@ -43,31 +43,33 @@
                 </label>
                 <input class="nav__input" name="open" id="open" type="checkbox">
                 <ul class="nav__menu">
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/" ? 'link-mark' : '' }}" href="{{ path('app_home') }}">Home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/viaggi" ? 'link-mark' : '' }}" href="{{ path('app_category_viaggi') }}">Viaggi</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/eventi" ? 'link-mark' : '' }}" href="{{ path('app_category_eventi') }}">Eventi</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/documenti" ? 'link-mark' : '' }}" href="{{ path('app_category_documenti') }}">Documenti</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/vivere-estero" ? 'link-mark' : '' }}" href="{{ path('app_category_estero') }}">Vivere all'estero</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/chi-siamo" ? 'link-mark' : '' }}" href="{{ path('app_about-us') }}">Chi siamo</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/contatti" ? 'link-mark' : '' }}" href="{{ path('app_contact') }}">Contatti</a>
-                    </li>
-                    {% if is_granted('ROLE_ADMIN')  %}
+                    {% if app.request.attributes.get('_route') is not null %}
                         <li class="nav__item">
-                            <a class="link-effect-load" href="{{ path('app_admin') }}">Admin</a>
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/" ? 'link-mark' : '' }}" href="{{ path('app_home') }}">Home</a>
                         </li>
+                        <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/viaggi" ? 'link-mark' : '' }}" href="{{ path('app_category_viaggi') }}">Viaggi</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/eventi" ? 'link-mark' : '' }}" href="{{ path('app_category_eventi') }}">Eventi</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/documenti" ? 'link-mark' : '' }}" href="{{ path('app_category_documenti') }}">Documenti</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/vivere-estero" ? 'link-mark' : '' }}" href="{{ path('app_category_estero') }}">Vivere all'estero</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/chi-siamo" ? 'link-mark' : '' }}" href="{{ path('app_about-us') }}">Chi siamo</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/contatti" ? 'link-mark' : '' }}" href="{{ path('app_contact') }}">Contatti</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN')  %}
+                            <li class="nav__item">
+                                <a class="link-effect-load" href="{{ path('app_admin') }}">Admin</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </nav>
