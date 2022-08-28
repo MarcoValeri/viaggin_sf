@@ -1,121 +1,120 @@
 {% extends "base.html.twig" %}
 
+{# Set up empty variables for author content #}
+{% set authorName = '' %}
+{% set authorDescription = '' %}
+{% set authorUrl = '' %}
+
+{# Flags variable that helps with 404 template #}
+{% set break = false %}
+{% set notFound = true %}
+{% for author in getAllAuthors %}
+    {% if slug == author.url %}
+        {# Set up tag variavles #}
+        {% set authorName = author.name %}
+        {% set authorDescription = author.description %}
+        {% set authorUrl = author.url %}
+        {% set break = true %}
+        {% set notFound = false %}
+    {% endif %}
+{% endfor %}
+
 {% block title %}
-    <title>Add title</title>
+    <title>{{ authorName }} autore di ViaggIn</title>
 {% endblock %}
 
 {% block description %}
-    <meta name="Description" CONTENT="Add description">
+    <meta name="Description" CONTENT="{{ authorDescription }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% if break == true and notFound == false %}
+        <div class="breadcrumbs">
+            <div class="breadcrumbs__container">
+                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+                <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_author', {'slug': authorUrl}) }}">Autore {{ authorName }}</a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
-    <section class="author">
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">Marco Valeri</h2>
+    {# 
+    # If the tag url exist
+    # public it
+    # otherwise show 404 template
+    #}
+    {% if (break == false and notFound == true) %}
+        <div class="article__container-404">
+            <h1 class="h1">Errore 404</h1>
+            <p class="article__404-description body-2">Sembra che la pagina o l'articolo che stai cercando non esista.</p>
+            <div class="article__404-container-action">
+            <h3 class="h3">Cosa vuoi fare?</h3>
+            <div class="article__404-action-flex">
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_home') }}" class="button button--yellow">Home</a>
                 </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_viaggi') }}" class="button button--yellow">Viaggi</a>
                 </div>
-            </a>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_eventi') }}" class="button button--yellow">Eventi</a>
+                </div>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_documenti') }}" class="button button--yellow">Documenti</a>
+                </div>
+                <div class="article__404-action-flex-single">
+                    <a href="{{ path('app_category_estero') }}" class="button button--yellow">Vivere all'estero</a>
+                </div>
+            </div>
         </div>
-    </section>
-    <section class="author__container-articles">
-        <div class="author__container-title">
-            <h2 class="h2">Tutti gli articoli di Marco Valeri</h2>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
+    {% else %}
+        <section class="author">
+            <div class="author-card">
+                <a href="{{ path('app_author', {'slug': authorUrl}) }}" class="author-card__link link-no-style">
+                    <div class="author-card__container-title">
+                        <h2 class="h3">{{ authorName }}</h2>
+                    </div>
+                    <div class="author-card__container-content">
+                        <div class="author-card__paragraph body-2">
+                            <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
+                            {{ authorDescription }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="author__container-all-authors">
+                <a href="{{ path('app_authors') }}" class="button button--yellow">Tutti gli autori</a>
+            </div>
+            <div class="author__container-articles">
+                <div class="author__container-title">
+                    <h2 class="h2">Tutti gli articoli di {{ authorName }}</h2>
                 </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="article-card">
-            <a href="#" class="article-card__link link-no-style">
-                <div class="article-card__container-title">
-                    <h2 class="h3">Autunno in montagna: dove andare? 8 mete autunnali</h2>
-                </div>
-                <div class="article-card__container-data">
-                    <span class="article-card__data body-6">Pubblicato il 24/06/2022 - Marco Valeri - 0 commenti</span>
-                </div>
-                <div class="article-card__container-content">
-                    <p class="article-card__paragraph body-2">
-                        <img class="article-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nihil odit, incidunt consequatur, commodi vel dolor alias laborum, ducimus qui repellendus! Neque a soluta explicabo nemo fugiat vitae nulla sit.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae illo laboriosam atque expedita ipsa natus eos odio, nisi vero quibusdam velit perferendis voluptatibus, labore nam! Fuga rem placeat dolores labore.
-                    </p>
-                </div>
-            </a>
-        </div>
-    </section>
+                {% for key, article in getAllArticles|reverse %}
+                    {% if key < 10 %}
+                        {% if article.author == authorName %}
+                            <div class="article-card">
+                                <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
+                                    <div class="article-card__container-title">
+                                        <h2 class="h3">{{ article.getTitle }}</h2>
+                                    </div>
+                                    <div class="article-card__container-data">
+                                        <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('m/d/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
+                                    </div>
+                                    <div class="article-card__container-content">
+                                        <div class="article-card__paragraph body-2">
+                                            <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
+                                            {% set articleContent = article.content|slice(0, 400) ~ '...' %}
+                                            {{ articleContent|raw }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}

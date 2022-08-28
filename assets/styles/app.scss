@@ -14,7 +14,6 @@
 
 // Include layout files
 @import './layout/article';
-@import './layout/author';
 @import './layout/category';
 @import './layout/content';
 @import './layout/footer';
@@ -24,6 +23,8 @@
 // Include page files
 @import './pages/about-us';
 @import './pages/article-list';
+@import './pages/author';
+@import './pages/authors';
 @import './pages/contact';
 @import './pages/contact-confirm';
 @import './pages/home';

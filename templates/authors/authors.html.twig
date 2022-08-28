@@ -8,75 +8,35 @@
     <meta name="Description" CONTENT="ViaggIn: lista degli autori che scrivono gli articoli e le guide di viaggio, degli eventi, dei documenti per viaggiare e le news per vivere all'estero">
 {% endblock %}
 
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="breadcrumbs__container">
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_authors') }}">Tutti gli autori</a>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <section class="authors__container-author">
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">Marco Valeri</h2>
-                </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
-                </div>
-            </a>
+    <section class="authors">
+        <div class="authors__container-title">
+            <h1 class="h1">Tutti gli autori di ViaggIn</h1>
         </div>
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">Marco Valeri</h2>
-                </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">Marco Valeri</h2>
-                </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="author-card">
-            <a href="{{ path('app_author') }}" class="author-card__link link-no-style">
-                <div class="author-card__container-title">
-                    <h2 class="h3">Marco Valeri</h2>
-                </div>
-                <div class="author-card__container-content">
-                    <p class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
-                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                        Oggi lavoro a Londra come Software Engineer
-                    </p>
-                </div>
-            </a>
-        </div>
+        {% for author in getAllAuthors  %}
+            <div class="author-card">
+                <a href="{{ path('app_author', {'slug': author.url }) }}" class="author-card__link link-no-style">
+                    <div class="author-card__container-title">
+                        <h2 class="h3">{{ author.name }}</h2>
+                    </div>
+                    <div class="author-card__container-content">
+                        <div class="author-card__paragraph body-2">
+                            <img class="author-card__img" src="../images/cambiare-vita-a-30-anni.webp" alt="Cambiare vita a 30 anni">
+                            {{ author.description }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
     </section>
 {% endblock %}
