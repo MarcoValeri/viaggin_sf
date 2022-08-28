@@ -1,0 +1,50 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>ViaggIn: error 403, pagina non trovata</title>
+{% endblock %}
+
+{% block description %}
+    <meta name="Description" CONTENT="ViaggIn Error 403, page not found">
+{% endblock %}
+
+{% block data_structure %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Page",
+            "headline": "ViaggIn: error 403, pagina non trovata"
+        }
+    </script>
+{% endblock %}
+
+{% block index %}
+    <meta name="robots" content="noindex" />
+{% endblock %}
+
+{% block body %}
+    <div class="article__container-404">
+        <h1 class="h1">Errore 403</h1>
+        <p class="article__404-description body-2">Sembra che la pagina o l'articolo che stai cercando non esista.</p>
+        <div class="article__404-container-action">
+        <h3 class="h3">Cosa vuoi fare?</h3>
+        <div class="article__404-action-flex">
+            <div class="article__404-action-flex-single">
+                <a href="{{ path('app_home') }}" class="button button--yellow">Home</a>
+            </div>
+            <div class="article__404-action-flex-single">
+                <a href="{{ path('app_category_viaggi') }}" class="button button--yellow">Viaggi</a>
+            </div>
+            <div class="article__404-action-flex-single">
+                <a href="{{ path('app_category_eventi') }}" class="button button--yellow">Eventi</a>
+            </div>
+            <div class="article__404-action-flex-single">
+                <a href="{{ path('app_category_documenti') }}" class="button button--yellow">Documenti</a>
+            </div>
+            <div class="article__404-action-flex-single">
+                <a href="{{ path('app_category_estero') }}" class="button button--yellow">Vivere all'estero</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
