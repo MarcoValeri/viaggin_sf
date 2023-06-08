@@ -1,5 +1,24 @@
 {% extends "base.html.twig" %}
 
+{# Set Article Variables #}
+{% if article %}
+    {% set articleTitle = article.title %}
+    {% set articleDescription = article.description %}
+    {% set articleUrl = article.url %}
+    {% set articleContent = article.content %}
+    {% set articleImage = article.image %}
+    {% set articleImageAlt = article.image %}
+    {% set articleAuthor = article.author %}
+    {% set articleAuthorImage = article.author %}
+    {% set articleDate = article.date %}
+    {% set articleUpdate = article.getUpdateAt %}
+    {% set articleCategory = article.category %}
+    {% set articleCategoryUrl = article.category %}
+    {% set articleTag = article.getTags %}
+    {% set articleComments = article.getComments %}
+    {% set articleCommentsNum = 0 %}
+{% endif %}
+
 {# 
 # Set up date variables.
 # Use seconds to compare date.
@@ -8,76 +27,16 @@
 #}
 {% set getDateToday = "now"|date('U') %}
 
-{# Set up empty variable for article content #}
-{% set articleTitle = '' %}
-{% set articleDescription = '' %}
-{% set articleUrl = '' %}
-{% set articleContent = '' %}
-{% set articleImage = '' %}
-{% set articleImageAlt = '' %}
-{% set articleAuthor = '' %}
-{% set articleAuthorImage = '' %}
-{% set articleDate = '' %}
-{% set articleUpdate = '' %}
-{% set articleCategory = '' %}
-{% set articleCategoryUrl = '' %}
-{% set articleTag = '' %}
-{% set articleComments = '' %}
-{% set articleCommentsNum = 0 %}
-
-{# Flags variable that helps with 404 template #}
-{% set break = false %}
-{% set notFound = true %}
-{% for article in getArticles %}
-    {% if slug == article.url %}
-        {# Set up article variavles #}
-        {% set articleTitle = article.title %}
-        {% set articleDescription = article.description %}
-        {% set articleUrl = article.url %}
-        {% set articleContent = article.content %}
-        {% set articleImage = article.getImage %}
-        {% set articleImageAlt = article.getImage.title %}
-        {% set articleAuthor = article.getAuthor %}
-        {% set articleAuthorImage = articleAuthor.image %}
-        {% set articleDate = article.getDate %}
-        {% set articleUpdate = article.getUpdateAt %}
-        {% set articleCategory = article.getCategory %}
-        {% set articleCategoryUrl = article.getCategory.url %}
-        {% set articleTag = article.getTags %}
-        {% set articleComments = article.getComments %}
-        {% set articleCommentsNum = articleComments|length %}
-        {% set break = true %}
-        {% set notFound = false %}
-    {% endif %}
-{% endfor %}
-
 {% block title %}
-    {% if break == false and notFound == true %}
-        <title>ViaggIn: error 404, pagina non trovata</title>
-    {% else %}
-        <title>{{ articleTitle|raw }}</title>
-    {% endif %}
+    <title>{{ articleTitle|raw }}</title>
 {% endblock %}
 
 {% block description %}
-    {% if break == false and notFound == true %}
-        <meta name="Description" CONTENT="ViaggIn Error 404, page not found">
-    {% else %}
-        <meta name="Description" CONTENT="{{ articleDescription|raw }}">
-    {% endif %}
+    <meta name="Description" CONTENT="{{ articleDescription|raw }}">
 {% endblock %}
 
 {% block data_structure %}
-    {% if break == false and notFound == true %}
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org/",
-                "@type": "Page",
-                "headline": "ViaggIn: error 404, pagina non trovata"
-            }
-        </script>
-    {% else %}
-        <script type="application/ld+json">
+    <script type="application/ld+json">
         {
             "@context": "https://schema.org/",
             "@type": "Article",
@@ -92,157 +51,125 @@
             },
         }
     </script>
-    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% if break == true and notFound == false %}
-        <div class="breadcrumbs">
-            <div class="breadcrumbs__container">
-                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
-                <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-                <a class="breadcrumbs__item link-no-style body-4" href="{{ articleCategoryUrl }}">{{ articleCategory }}</a>
-                <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article', {'slug': articleUrl}) }}">{{ articleTitle }}</a>
-            </div>
+    <div class="breadcrumbs">
+        <div class="breadcrumbs__container">
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ articleCategoryUrl }}">{{ articleCategory }}</a>
+            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_article', {'slug': articleUrl}) }}">{{ articleTitle }}</a>
         </div>
-    {% endif %}
+    </div>
+{% endblock %}
+
+{% block canonical %}
+    <link rel="canonical" href="https://www.viaggin.com/{{ articleUrl }}">
 {% endblock %}
 
 {% block body %}
-    {# 
-    # If the article url exist
-    # and
-    # if current date is less than article data
-    # public it
-    # otherwise show 404 template
-    #}
-    {% if (break == false and notFound == true) or (getDateToday < articleDate|date('U')) %}
-        <div class="article__container-404">
-            <h1 class="h1">Errore 404</h1>
-            <p class="article__404-description body-2">Sembra che la pagina o l'articolo che stai cercando non esista.</p>
-            <div class="article__404-container-action">
-            <h3 class="h3">Cosa vuoi fare?</h3>
-            <div class="article__404-action-flex">
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_home') }}" class="button button--yellow">Home</a>
-                </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_viaggi') }}" class="button button--yellow">Viaggi</a>
-                </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_eventi') }}" class="button button--yellow">Eventi</a>
-                </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_documenti') }}" class="button button--yellow">Documenti</a>
-                </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_estero') }}" class="button button--yellow">Vivere all'estero</a>
-                </div>
-            </div>
+    <article class="article">
+        <h1 class="article__title h1">{{ articleTitle }}</h1>
+        <ul class="article__data">
+            <li class="article__data-item body-3">Autore: {{ articleAuthor }}</li>
+            <li class="article__data-item body-3">Pubblicato il: {{ articleDate|date('d-m-Y') }}</li>
+            <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate|date('d-m-Y') }}</li>
+            <li class="article__data-item body-3">
+                <a class="list-no-style__inherit-color" href="#article-container-comments">Commenti: {{ articleCommentsNum }}</a>
+            </li>
+        </ul>
+        {{ articleContent|raw }}
+        <div class="article__container-image">
+            <img class="article__img" src="../images/{{ articleImage }}" alt="{{ articleImageAlt }}">
         </div>
-    {% else %}
-        <article class="article">
-            <h1 class="article__title h1">{{ articleTitle }}</h1>
-            <ul class="article__data">
-                <li class="article__data-item body-3">Autore: {{ articleAuthor }}</li>
-                <li class="article__data-item body-3">Pubblicato il: {{ articleDate|date('d-m-Y') }}</li>
-                <li class="article__data-item body-3">Ultima modifica: {{ articleUpdate|date('d-m-Y') }}</li>
-                <li class="article__data-item body-3">
-                    <a class="list-no-style__inherit-color" href="#article-container-comments">Commenti: {{ articleCommentsNum }}</a>
+        <div class="article__container-taxonomi">
+            <ul class="list-no-style">
+                <li class="list-no-style__item">
+                    <span class="body-4">Categoria:</span> <a href="{{ articleCategoryUrl }}" class="link body-4">{{ articleCategory }}</a>
+                </li>
+                <li class="list-no-style__item">
+                    {{ (articleTag|length == 1) ? '<span class="body-4">Tag:</span>' : '<span class="body-4">Tags:</span>' }}
+                    {% for key, tag in articleTag %}
+                        <a class="link body-4" href="{{ path('app_tag', {'slug': tag.url }) }}">{{ tag.name }}</a>{{ (key != articleTag|length - 1) ? ',' : '' }}
+                    {% endfor %}
                 </li>
             </ul>
-            {{ articleContent|raw }}
-            <div class="article__container-image">
-                <img class="article__img" src="../images/{{ articleImage }}" alt="{{ articleImageAlt }}">
+        </div>
+    </article>
+    <section class="article__container-author">
+        <h2 class="article__container-author-title h2">Articolo scritto da</h2>
+        <div class="author-card">
+            <a href="{{ path('app_author', { 'slug': articleAuthor.url }) }}" class="author-card__link link-no-style">
+                <div class="author-card__container-title">
+                    <h2 class="h3">{{ articleAuthor.name }}</h2>
+                </div>
+                <div class="author-card__container-content">
+                    <p class="author-card__paragraph body-2">
+                        <img class="author-card__img" src="../images/{{ articleAuthorImage }}" alt="Immagine dell'autorə {{ articleAuthor }}">
+                        Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
+                        Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
+                        Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
+                        “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
+                        Oggi lavoro a Londra come Software Engineer
+                    </p>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="article-container-comments" class="article__container-comments-form">
+        <h3 class="article__comments-sub-title h3">Lascia un commento</h3>
+        <!-- Success message if form has been submitted -->
+        {% for message in app.flashes('success') %}
+            <div class="article__container-comments-success">
+                <p class="article__comments-success body-2">{{ message }}</p>
             </div>
-            <div class="article__container-taxonomi">
-                <ul class="list-no-style">
-                    <li class="list-no-style__item">
-                        <span class="body-4">Categoria:</span> <a href="{{ articleCategoryUrl }}" class="link body-4">{{ articleCategory }}</a>
-                    </li>
-                    <li class="list-no-style__item">
-                        {{ (articleTag|length == 1) ? '<span class="body-4">Tag:</span>' : '<span class="body-4">Tags:</span>' }}
-                        {% for key, tag in articleTag %}
-                            <a class="link body-4" href="{{ path('app_tag', {'slug': tag.url }) }}">{{ tag.name }}</a>{{ (key != articleTag|length - 1) ? ',' : '' }}
-                        {% endfor %}
-                    </li>
-                </ul>
+        {% endfor %}
+        {{ form_start(formComment, {'action': '#article-container-comments'}) }}
+            <div class="article__form-comments-grid">
+                <div class="article__form-comments-name article__input">
+                    {{ form_row(formComment.name) }}
+                </div>
+                <div class="article__form-comments-email article__input">
+                    {{ form_row(formComment.email) }}
+                </div>
+                <div class="article__form-comments-comment article__input">
+                    {{ form_row(formComment.comment) }}
+                </div>
+                <div class="article__form-comments-privacy article__input">
+                    {{ form_widget(formComment.privacy) }}
+                    {{ form_label(formComment.privacy, 'Accetto la privacy policy', { 
+                        'label_attr': {'class': 'contact__privacy-label' } 
+                        }) }}
+                </div>
+                <div class="article__form-comments-submit article__input">
+                    {{ form_row(formComment.submit) }}
+                    <p class="body-3">Per maggiori informazioni consulta la <a href="#">Privacy Policy di ViaggIn</a></p>
+                </div>
             </div>
-        </article>
-        <section class="article__container-author">
-            <h2 class="article__container-author-title h2">Articolo scritto da</h2>
-            <div class="author-card">
-                <a href="{{ path('app_author', { 'slug': articleAuthor.url }) }}" class="author-card__link link-no-style">
-                    <div class="author-card__container-title">
-                        <h2 class="h3">{{ articleAuthor.name }}</h2>
+        {{ form_end(formComment) }}
+    </section>
+    <section id="" class="article__container-comments">
+        <h2 class="article__comments-title h2">
+            {{ articleCommentsNum }} {{ (articleCommentsNum == 1) ? 'commento' : 'commenti' }}
+        </h2>
+        {% for comment in articleComments %}
+            {% if comment.approved %}
+                <div class="comment-card">
+                    <div class="comment-card__container-title">
+                        <h2 class="h3">{{ comment.name }}</h2>
                     </div>
-                    <div class="author-card__container-content">
-                        <p class="author-card__paragraph body-2">
-                            <img class="author-card__img" src="../images/{{ articleAuthorImage }}" alt="Immagine dell'autorə {{ articleAuthor }}">
-                            Mi chiamo Marco Valeri, sono nato a Roma e attualmente vivo a Londra, città che mi ha cambiato la vita.
-                            Laureato in Computer Science alla Birkbeck University of London, divoro libri, amo scrivere e non mi stanco mai di conoscere cose nuove, soprattutto legate alla comunicazione, alla crescita personale e allo sviluppo del web.
-                            Ho fatto praticamente ogni tipo di lavoro per mantenermi e questo mi ha permesso di capire che l’età non è mai un limite per essere ciò che vuoi essere.
-                            “La disciplina è libertà” è quel concetto che provo a mettere in pratica ogni giorno.
-                            Oggi lavoro a Londra come Software Engineer
+                    <div class="comment-card__container-data">
+                        <span class="comment-card__data body-6">Pubblicato il {{ comment.getDate }} da {{ comment.name }}</span>
+                    </div>
+                    <div class="comment-card__container-content">
+                        <p class="comment-card__paragraph body-2">
+                            {{ comment.getContent }}
                         </p>
                     </div>
-                </a>
-            </div>
-        </section>
-        <section id="article-container-comments" class="article__container-comments-form">
-            <h3 class="article__comments-sub-title h3">Lascia un commento</h3>
-            <!-- Success message if form has been submitted -->
-            {% for message in app.flashes('success') %}
-                <div class="article__container-comments-success">
-                    <p class="article__comments-success body-2">{{ message }}</p>
                 </div>
-            {% endfor %}
-            {{ form_start(formComment, {'action': '#article-container-comments'}) }}
-                <div class="article__form-comments-grid">
-                    <div class="article__form-comments-name article__input">
-                        {{ form_row(formComment.name) }}
-                    </div>
-                    <div class="article__form-comments-email article__input">
-                        {{ form_row(formComment.email) }}
-                    </div>
-                    <div class="article__form-comments-comment article__input">
-                        {{ form_row(formComment.comment) }}
-                    </div>
-                    <div class="article__form-comments-privacy article__input">
-                        {{ form_widget(formComment.privacy) }}
-                        {{ form_label(formComment.privacy, 'Accetto la privacy policy', { 
-                            'label_attr': {'class': 'contact__privacy-label' } 
-                            }) }}
-                    </div>
-                    <div class="article__form-comments-submit article__input">
-                        {{ form_row(formComment.submit) }}
-                        <p class="body-3">Per maggiori informazioni consulta la <a href="#">Privacy Policy di ViaggIn</a></p>
-                    </div>
-                </div>
-            {{ form_end(formComment) }}
-        </section>
-        <section id="" class="article__container-comments">
-            <h2 class="article__comments-title h2">
-                {{ articleCommentsNum }} {{ (articleCommentsNum == 1) ? 'commento' : 'commenti' }}
-            </h2>
-            {% for comment in articleComments %}
-                {% if comment.approved %}
-                    <div class="comment-card">
-                        <div class="comment-card__container-title">
-                            <h2 class="h3">{{ comment.name }}</h2>
-                        </div>
-                        <div class="comment-card__container-data">
-                            <span class="comment-card__data body-6">Pubblicato il {{ comment.getDate }} da {{ comment.name }}</span>
-                        </div>
-                        <div class="comment-card__container-content">
-                            <p class="comment-card__paragraph body-2">
-                                {{ comment.getContent }}
-                            </p>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </section>
-    {% endif %}
+            {% endif %}
+        {% endfor %}
+    </section>
 {% endblock %}

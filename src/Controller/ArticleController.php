@@ -69,13 +69,26 @@ class ArticleController extends AbstractController {
         }
 
         // Save all the articles into a variable
-        $getArticles = $articleRepository->findAll();
+        // $getArticles = $articleRepository->findAll();
 
-        return $this->render('articles/article.html.twig', [
-            'getArticles'   => $getArticles,
-            'slug'          => $slug,
-            'formComment'   => $formComment->createView()
-        ]);
+        // return $this->render('articles/article.html.twig', [
+        //     'getArticles'   => $getArticles,
+        //     'slug'          => $slug,
+        //     'formComment'   => $formComment->createView()
+        // ]);
+
+        $article = $articleRepository->findOneBy(['url' => $slug]);
+        
+        if ($article) {
+            return $this->render('articles/article.html.twig', [
+                'article'       => $article,
+                'slug'          => $slug,
+                'formComment'   => $formComment->createView()
+            ]);
+        } else {
+            return $this->redirectToRoute('app_error404');
+        }
+
     }
 
 }
