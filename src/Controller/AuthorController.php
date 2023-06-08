@@ -15,29 +15,28 @@ class AuthorController extends AbstractController {
         // Save authors into a variable
         $getAllAuthors = $authorRepository->findAll();
 
-        // Save articles into a variable
-        $getAllArticles = $articleRepository->findAll();
-
         return $this->render('authors/authors.html.twig', [
-            'getAllAuthors'  => $getAllAuthors,
-            'getAllArticles' => $getAllArticles
+            'getAllAuthors'  => $getAllAuthors
         ]);
     }
 
     #[Route('/autori/{slug}', name: 'app_author', priority: 1)]
     public function author(AuthorRepository $authorRepository, ArticleRepository $articleRepository, string $slug) {
 
-        // Save authors into a variable
-        $getAllAuthors = $authorRepository->findAll();
-
-        // Save articles into a variable
+        $author = $authorRepository->findOneBy(['url' => $slug]);
         $getAllArticles = $articleRepository->findAll();
 
-        return $this->render('authors/author.html.twig', [
-            'slug'           => $slug,
-            'getAllAuthors'  => $getAllAuthors,
-            'getAllArticles' => $getAllArticles
-        ]);
+        if ($author) {
+            return $this->render('authors/author.html.twig', [
+                'slug'           => $slug,
+                'author'         => $author,
+                'getAllArticles' => $getAllArticles
+            ]);
+        } else {
+            return $this->redirectToRoute('app_error404');
+        }
+
+        
     }
 
 }

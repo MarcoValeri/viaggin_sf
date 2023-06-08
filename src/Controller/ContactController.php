@@ -37,7 +37,7 @@ class ContactController extends AbstractController {
 
             $emailMessage = wordwrap($emailMessage, 100);
 
-            // mail("info@marcovaleri.net", "Contatti ViaggIn.com", $emailMessage);
+            mail("info@marcovaleri.net", "Contatti ViaggIn.com", $emailMessage);
 
             return $this->redirectToRoute('app_contact_confirm');
 

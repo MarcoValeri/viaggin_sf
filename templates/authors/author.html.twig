@@ -1,150 +1,90 @@
 {% extends "base.html.twig" %}
 
-{# Set up empty variables for author content #}
-{% set authorName = '' %}
-{% set authorDescription = '' %}
-{% set authorUrl = '' %}
-{% set authorImage = '' %}
-
-{# Flags variable that helps with 404 template #}
-{% set break = false %}
-{% set notFound = true %}
-{% for author in getAllAuthors %}
-    {% if slug == author.url %}
-        {# Set up tag variavles #}
-        {% set authorName = author.name %}
-        {% set authorDescription = author.description %}
-        {% set authorUrl = author.url %}
-        {% set authorImage = author.image %}
-        {% set break = true %}
-        {% set notFound = false %}
-    {% endif %}
-{% endfor %}
+{# Set Author Variables #}
+{% if author %}
+    {% set authorName = author.name %}
+    {% set authorDescription = author.description %}
+    {% set authorUrl = author.url %}
+    {% set authorImage = author.image %}
+{% endif %}
 
 {% block title %}
-    {% if break == false and notFound == true %}
-        <title>ViaggIn: error 404, pagina non trovata</title>
-    {% else %}
-        <title>{{ authorName|raw }} autore di ViaggIn</title>
-    {% endif %}
+    <title>{{ authorName|raw }} autore di ViaggIn</title>
 {% endblock %}
 
 {% block description %}
-    {% if break == false and notFound == true %}
-        <meta name="Description" CONTENT="ViaggIn Error 404, page not found">
-    {% else %}
-        <meta name="Description" CONTENT="{{ authorDescription|raw }}">
-    {% endif %}
+    <meta name="Description" CONTENT="{{ authorDescription|raw }}">
 {% endblock %}
 
 {% block data_structure %}
-    {% if break == false and notFound == true %}
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org/",
-                "@type": "Page",
-                "headline": "ViaggIn: error 404, pagina non trovata"
-            }
-        </script>
-    {% else %}
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org/",
-                "@type": "Page",
-                "headline": "Autore {{ authorName }}"
-            }
-        </script>
-    {% endif %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Page",
+            "headline": "Autore {{ authorName }}"
+        }
+    </script>
+{% endblock %}
+
+{% block canonical %}
+    <link rel="canonical" href="https://www.viaggin.com/autori/{{ authorUrl }}">
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% if break == true and notFound == false %}
-        <div class="breadcrumbs">
-            <div class="breadcrumbs__container">
-                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
-                <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-                <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_author', {'slug': authorUrl}) }}">Autore {{ authorName }}</a>
-            </div>
+    <div class="breadcrumbs">
+        <div class="breadcrumbs__container">
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
+            <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_author', {'slug': authorUrl}) }}">Autore {{ authorName }}</a>
         </div>
-    {% endif %}
+    </div>
 {% endblock %}
 
 {% block body %}
-    {# 
-    # If the tag url exist
-    # public it
-    # otherwise show 404 template
-    #}
-    {% if (break == false and notFound == true) %}
-        <div class="article__container-404">
-            <h1 class="h1">Errore 404</h1>
-            <p class="article__404-description body-2">Sembra che la pagina o l'articolo che stai cercando non esista.</p>
-            <div class="article__404-container-action">
-            <h3 class="h3">Cosa vuoi fare?</h3>
-            <div class="article__404-action-flex">
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_home') }}" class="button button--yellow">Home</a>
+    <section class="author">
+        <div class="author-card">
+            <a href="{{ path('app_author', {'slug': authorUrl}) }}" class="author-card__link link-no-style">
+                <div class="author-card__container-title">
+                    <h2 class="h3">{{ authorName }}</h2>
                 </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_viaggi') }}" class="button button--yellow">Viaggi</a>
+                <div class="author-card__container-content">
+                    <div class="author-card__paragraph body-2">
+                        <img class="author-card__img" src="../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}">
+                        {{ authorDescription }}
+                    </div>
                 </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_eventi') }}" class="button button--yellow">Eventi</a>
-                </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_documenti') }}" class="button button--yellow">Documenti</a>
-                </div>
-                <div class="article__404-action-flex-single">
-                    <a href="{{ path('app_category_estero') }}" class="button button--yellow">Vivere all'estero</a>
-                </div>
-            </div>
+            </a>
         </div>
-    {% else %}
-        <section class="author">
-            <div class="author-card">
-                <a href="{{ path('app_author', {'slug': authorUrl}) }}" class="author-card__link link-no-style">
-                    <div class="author-card__container-title">
-                        <h2 class="h3">{{ authorName }}</h2>
-                    </div>
-                    <div class="author-card__container-content">
-                        <div class="author-card__paragraph body-2">
-                            <img class="author-card__img" src="../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}">
-                            {{ authorDescription }}
+        <div class="author__container-all-authors">
+            <a href="{{ path('app_authors') }}" class="button button--yellow">Tutti gli autori</a>
+        </div>
+        <div class="author__container-articles">
+            <div class="author__container-title">
+                <h2 class="h2">Tutti gli articoli di {{ authorName }}</h2>
+            </div>
+            {% for key, article in getAllArticles|reverse %}
+                {% if key < 10 %}
+                    {% if article.author == authorName %}
+                        <div class="article-card">
+                            <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
+                                <div class="article-card__container-title">
+                                    <h2 class="h3">{{ article.getTitle }}</h2>
+                                </div>
+                                <div class="article-card__container-data">
+                                    <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('m/d/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
+                                </div>
+                                <div class="article-card__container-content">
+                                    <div class="article-card__paragraph body-2">
+                                        <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
+                                        {% set articleContent = article.content|slice(0, 400) ~ '...' %}
+                                        {{ articleContent|raw }}
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="author__container-all-authors">
-                <a href="{{ path('app_authors') }}" class="button button--yellow">Tutti gli autori</a>
-            </div>
-            <div class="author__container-articles">
-                <div class="author__container-title">
-                    <h2 class="h2">Tutti gli articoli di {{ authorName }}</h2>
-                </div>
-                {% for key, article in getAllArticles|reverse %}
-                    {% if key < 10 %}
-                        {% if article.author == authorName %}
-                            <div class="article-card">
-                                <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
-                                    <div class="article-card__container-title">
-                                        <h2 class="h3">{{ article.getTitle }}</h2>
-                                    </div>
-                                    <div class="article-card__container-data">
-                                        <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('m/d/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
-                                    </div>
-                                    <div class="article-card__container-content">
-                                        <div class="article-card__paragraph body-2">
-                                            <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
-                                            {% set articleContent = article.content|slice(0, 400) ~ '...' %}
-                                            {{ articleContent|raw }}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        {% endif %}
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
-    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
