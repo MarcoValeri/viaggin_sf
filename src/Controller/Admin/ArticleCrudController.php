@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -42,5 +43,15 @@ class ArticleCrudController extends AbstractCrudController
                 ]),
             CodeEditorField::new('content')
         ];
+    }
+
+    /**
+     * Set all the content in DESC order by their date
+     */
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)->setDefaultSort([
+            'date'      => 'DESC'
+        ]);
     }
 }
