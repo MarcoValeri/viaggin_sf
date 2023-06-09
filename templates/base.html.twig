@@ -24,10 +24,10 @@
         {% endblock %}
 
         {% block canonical %}
-            <link rel="canonical" href="https://ww.viaggin.com">
+            <link rel="canonical" href="https://www.viaggin.com">
         {% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="../images/viaggin-logo.png">
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/viaggin-logo.png') }}">
         
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -115,13 +115,13 @@
                     </div>
                     <ul class="content__sidebar-menu">
                         <li class="content__sidebar-menu-item">
-                            <a class="link-no-style" href="https://www.facebook.com/marcovaleri.net" target="_blank">
-                                <img src="{{ asset('images/facebook-icon.svg') }}" alt="Facebook Icon">
+                            <a class="link-no-style" href="https://www.facebook.com/viaggin" target="_blank">
+                                <img src="{{ asset('images/facebook-logo.png') }}" alt="Facebook Logo" width="50" height="50">
                             </a>
                         </li>
                         <li class="content__sidebar-menu-item">
-                            <a class="link-no-style" href="https://www.instagram.com/marco__valeri/" target="_blank">
-                                <img src="{{ asset('images/facebook-icon.svg') }}" alt="Instagram Icon">
+                            <a class="link-no-style" href="https://www.instagram.com/viaggin_official/" target="_blank">
+                                <img src="{{ asset('images/instagram-logo.png') }}" alt="Instagram Logo" width="50" height="50">
                             </a>
                         </li>
                     </ul>

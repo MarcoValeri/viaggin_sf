@@ -9,7 +9,7 @@
     {% set articleImage = article.image %}
     {% set articleImageAlt = article.image %}
     {% set articleAuthor = article.author %}
-    {% set articleAuthorImage = article.author %}
+    {% set articleAuthorImage = article.author.getUrl %}
     {% set articleAuthorDescription = article.author.description %}
     {% set articleDate = article.date %}
     {% set articleUpdate = article.getUpdateAt %}
@@ -86,7 +86,7 @@
             <img class="article__img" src="../images/{{ articleImage }}" alt="{{ articleImageAlt }}">
         </div>
         <div class="article__container-taxonomi">
-            <ul class="list-no-style">
+            <ul class="article__taxonomi-menu list-no-style">
                 <li class="list-no-style__item">
                     <span class="body-4">Categoria:</span> <a href="{{ articleCategoryUrl }}" class="link body-4">{{ articleCategory }}</a>
                 </li>

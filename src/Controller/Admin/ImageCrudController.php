@@ -32,4 +32,5 @@ class ImageCrudController extends AbstractCrudController
             ->add('title')
             ->add('description');
     }
+
 }
