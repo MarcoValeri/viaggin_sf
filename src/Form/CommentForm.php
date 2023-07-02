@@ -20,6 +20,7 @@ class CommentForm extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
+            ->add('articleUrl', HiddenType::class)
             ->add('commentData', HiddenType::class,
                 [
                     'data'  => date('d-m-Y')
@@ -58,9 +59,9 @@ class CommentForm extends AbstractType {
                         [
                             new Length([
                                 'min' => 10,
-                                'max' => 1000,
+                                'max' => 5000,
                                 'minMessage' => 'Commento è troppo corto, dovrebbe essere di almeno 10 caratteri',
-                                'maxMessage' => 'Messaggio è troppo lungo, dovrebbe essere di massimo 1000 caratteri'
+                                'maxMessage' => 'Messaggio è troppo lungo, dovrebbe essere di massimo 5000 caratteri'
                             ])
                         ],
                     'attr' => ['placeholder' => 'Commento *']

@@ -17,6 +17,9 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $articleUrl = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -42,6 +45,18 @@ class Comment
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getArticleUrl(): ?string
+    {
+        return $this->articleUrl;
+    }
+
+    public function setArticleUrl(string $articleUrl): self
+    {
+        $this->articleUrl = $articleUrl;
+
+        return $this;
     }
 
     public function getName(): ?string

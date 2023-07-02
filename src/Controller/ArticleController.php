@@ -47,6 +47,7 @@ class ArticleController extends AbstractController {
 
             // Create new Comment
             $newComment = new Comment();
+            $newComment->setArticleUrl($slug);
             $newComment->setDate($commentDateInput);
             $newComment->setName($commentNameInput);
             $newComment->setEmail($commentEmailInput);

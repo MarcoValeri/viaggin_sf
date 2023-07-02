@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -21,7 +22,8 @@ class CommentCrudController extends AbstractCrudController
             TextField::new('name'),
             TextField::new('email'),
             TextField::new('content'),
-            BooleanField::new('approved')
+            TextField::new('article_url'),
+            BooleanField::new('approved'),
         ];
     }
 }
