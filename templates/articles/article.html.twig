@@ -17,7 +17,7 @@
     {% set articleCategoryUrl = article.category.url %}
     {% set articleTag = article.getTags %}
     {% set articleComments = article.getComments %}
-    {% set articleCommentsNum = 0 %}
+    {% set articleCommentsNum = articleComments|length %}
 {% endif %}
 
 {# 
