@@ -3,18 +3,25 @@
     margin-top: 5rem;
     padding: 0 2rem 5rem 2rem;
     display: flex;
-    align-items: end;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     background-color: $black;
 
     &__container-content {
+        width: 100%;
         text-align: center;
         color: $white;
+        margin-bottom: 2rem;
     }
 
     &__heart {
         font-size: 3.5rem;
         color: $red;
+    }
+    
+    &__container-privacy {
+        width: 100%;
+        text-align: center;
     }
 
 }

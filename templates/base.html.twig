@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,6 +36,19 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        {# Google Analytics 4 #}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSTXVCFJP7"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FSTXVCFJP7');
+        </script>
+
+        {# Google AdSense #}
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9306947071363993" crossorigin="anonymous"></script>
     </head>
     <body>
         <header class="header">
@@ -159,6 +172,10 @@
             <div class="footer__container-content">
                 <p class="body-3">Made with <span class="footer__heart">&hearts;</span> in London by Marco Valeri - &copy; {{ "now"|date("Y") }} - All rights reserved</p>
                 <p class="body-3"><a class="link-no-style link-no-style--white" href="{{ path('app_privacy_policy') }}">Privacy Policy</a> - <a class="link-no-style link-no-style--white" href="{{ path('app_cookie_policy') }}">Cookie Policy</a></p>
+            </div>
+            <div class="footer__container-privacy">
+                <!-- Iubenda Privacy and Cookie Policy -->
+                <a href="https://www.iubenda.com/privacy-policy/36030468" class="iubenda-white no-brand iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
             </div>
         </footer>
     </body>
