@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.viaggin.com/</loc>
+        <loc>https://viaggin.com/</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/categories</loc>
+        <loc>https://viaggin.com/categories</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/category/viaggi</loc>
+        <loc>https://viaggin.com/category/viaggi</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/category/eventi</loc>
+        <loc>https://viaggin.com/category/eventi</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/category/documenti</loc>
+        <loc>https://viaggin.com/category/documenti</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/category/vivere-estero</loc>
+        <loc>https://viaggin.com/category/vivere-estero</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/chi-siamo</loc>
+        <loc>https://viaggin.com/chi-siamo</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/contatti</loc>
+        <loc>https://viaggin.com/contatti</loc>
     </url>
     <url>
-        <loc>https://www.viaggin.com/contatti-conferma</loc>
+        <loc>https://viaggin.com/contatti-conferma</loc>
     </url>
     {% for author in authors %}
         <url>
-            <loc>https://www.viaggin.com/autori/{{ author.url }}</loc>
+            <loc>https://viaggin.com/autori/{{ author.url }}</loc>
         </url>
     {% endfor %}
     {% for tag in tags %}
         <url>
-            <loc>https://www.viaggin.com/tag/{{ tag.url }}</loc>
+            <loc>https://viaggin.com/tag/{{ tag.url }}</loc>
         </url>
     {% endfor %}
     <url>
-        <loc>https://www.viaggin.com/autori/tutti-gli-autori</loc>
+        <loc>https://viaggin.com/autori/tutti-gli-autori</loc>
     </url>
     {% set getDateToday = "now"|date('U') %}
     {% for article in articles %}
         {% if (getDateToday > article.date|date('U')) %}
             <url>
-                <loc>https://www.viaggin.com/{{ article.url }}</loc>
+                <loc>https://viaggin.com/{{ article.url }}</loc>
                 <lastmod>{{ article.getUpdateAt|date('Y-m-d') }}</lastmod>
             </url>
         {% endif %}
