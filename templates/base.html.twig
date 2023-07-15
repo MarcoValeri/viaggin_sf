@@ -92,7 +92,9 @@
             </nav>
             <div class="header__container">
                 <div class="header__logo">
-                    <img class="header__logo" src="{{ asset('images/viaggin-logo.png') }}" alt="Viaggin Logo">
+                    <a href="{{ path('app_home') }}">
+                        <img class="header__logo" src="{{ asset('images/viaggin-logo.png') }}" alt="Viaggin Logo">
+                    </a>
                 </div>
                 {% block breadcrumbs %}
                     <div class="breadcrumbs">

@@ -46,7 +46,7 @@
                         <div class="article-card__container-content">
                             <div class="article-card__paragraph body-2">
                                 <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
-                                {% set articleContent = article.content|slice(0, 400) ~ '...' %}
+                                {% set articleContent = article.content|striptags|slice(0, 400) ~ '...' %}
                                 {{ articleContent|raw }}
                             </div>
                         </div>

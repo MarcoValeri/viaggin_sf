@@ -16,6 +16,10 @@
         @include respond(xxl) {
             width: 95%;
         }
+
+        @include respond(sm) {
+            top: 60%
+        }
     }
 
     &__logo {
