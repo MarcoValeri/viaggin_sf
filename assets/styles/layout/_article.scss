@@ -10,7 +10,8 @@
 .article {
 
     @include respond("sm") {
-        padding: 0 1rem;
+        width: 95%;
+        margin: auto;
     }
 
     h2 {
@@ -44,6 +45,10 @@
 
         @include respond(md) {
             margin-left: 2rem;
+        }
+
+        @include respond(sm) {
+            margin-left: 4rem;
         }
     }
 
