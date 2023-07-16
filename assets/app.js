@@ -10,3 +10,6 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+// Import Scripts Files
+import './scripts/google-ads-banners-under-h2';

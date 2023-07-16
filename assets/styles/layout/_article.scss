@@ -9,6 +9,10 @@
 */
 .article {
 
+    @include respond("sm") {
+        padding: 0 1rem;
+    }
+
     h2 {
         font-size: 5rem;
 
