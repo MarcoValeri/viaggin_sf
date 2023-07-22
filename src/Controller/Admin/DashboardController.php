@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Author;
 use App\Entity\Category;
 use App\Entity\Comment;
+use App\Entity\File;
 use App\Entity\Image;
 use App\Entity\Tag;
 
@@ -55,6 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Content');
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', Image::class);
+        yield MenuItem::linkToCrud('Files', 'fa fa-files-o', File::class);
         yield MenuItem::linkToCrud('Categories', 'far fa-newspaper', Category::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tags', Tag::class);
         yield MenuItem::section('Authors');
