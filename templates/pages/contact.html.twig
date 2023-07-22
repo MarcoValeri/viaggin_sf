@@ -50,7 +50,7 @@
                 </div>
                 <div class="contact__container-submit contact__input">
                     {{ form_row(contactForm.submit) }}
-                    <p class="body-3">Per maggiori informazioni consulta la <a href="#">Privacy Policy di ViaggIn</a></p>
+                    <p class="body-3">Per maggiori informazioni consulta la <a href="{{ path('app_privacy_policy') }}">Privacy Policy di ViaggIn</a></p>
                 </div>
             </div>
         {{ form_end(contactForm) }}
