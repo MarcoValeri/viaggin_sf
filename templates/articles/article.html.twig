@@ -103,8 +103,6 @@
     <section class="article__container-author">
         <h2 class="article__container-author-title h2">Articolo scritto da</h2>
         <div class="author-card">
-            {# <p>{{ path('app_article', {'slug': article.getUrl}) }}</p> #}
-            <p>{{ articleAuthorUrl }}</p>
             <a href="{{ path('app_author', { 'slug': articleAuthorUrl }) }}" class="author-card__link link-no-style">
                 <div class="author-card__container-title">
                     <h2 class="h3">{{ articleAuthor.name }}</h2>

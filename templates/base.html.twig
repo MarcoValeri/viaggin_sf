@@ -65,16 +65,16 @@
                             <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/" ? 'link-mark' : '' }}" href="{{ path('app_home') }}">Home</a>
                         </li>
                         <li class="nav__item">
-                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/viaggi" ? 'link-mark' : '' }}" href="{{ path('app_category_viaggi') }}">Viaggi</a>
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/viaggi-pagina-0" ? 'link-mark' : '' }}" href="{{ path('app_category_viaggi', {pageNumber: 0}) }}">Viaggi</a>
                         </li>
                         <li class="nav__item">
-                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/eventi" ? 'link-mark' : '' }}" href="{{ path('app_category_eventi') }}">Eventi</a>
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/eventi-pagina-0" ? 'link-mark' : '' }}" href="{{ path('app_category_eventi', {pageNumber: 0}) }}">Eventi</a>
                         </li>
                         <li class="nav__item">
-                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/documenti" ? 'link-mark' : '' }}" href="{{ path('app_category_documenti') }}">Documenti</a>
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/documenti-pagina-0" ? 'link-mark' : '' }}" href="{{ path('app_category_documenti', {pageNumber: 0}) }}">Documenti</a>
                         </li>
                         <li class="nav__item">
-                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/vivere-estero" ? 'link-mark' : '' }}" href="{{ path('app_category_estero') }}">Vivere all'estero</a>
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/category/vivere-estero-pagina-0" ? 'link-mark' : '' }}" href="{{ path('app_category_estero', {pageNumber: 0}) }}">Vivere all'estero</a>
                         </li>
                         <li class="nav__item">
                             <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/chi-siamo" ? 'link-mark' : '' }}" href="{{ path('app_about-us') }}">Chi siamo</a>
@@ -101,13 +101,13 @@
                         {% if app.request.pathinfo == '/' %}
                             <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a></div>
                         {% elseif app.request.pathinfo == '/category/viaggi' %}
-                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_viaggi') }}">Viaggi</a></div>
+                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_viaggi', {pageNumber: 0}) }}">Viaggi</a></div>
                         {% elseif app.request.pathinfo == '/category/eventi' %}
-                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_eventi') }}">Eventi</a></div>
+                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_eventi', {pageNumber: 0}) }}">Eventi</a></div>
                         {% elseif app.request.pathinfo == '/category/documenti' %}
-                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_documenti') }}">Documenti</a></div>
+                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_documenti', {pageNumber: 0}) }}">Documenti</a></div>
                         {% elseif app.request.pathinfo == '/category/vivere-estero' %}
-                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_estero') }}">Vivere all'estero</a></div>
+                            <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_category_estero', {pageNumber: 0}) }}">Vivere all'estero</a></div>
                         {% elseif app.request.pathinfo == '/chi-siamo' %}
                             <div class="breadcrumbs__container"><a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a> <span class="breadcrumbs__item breadcrumbs__item-span">/</span> <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_about-us') }}">Chi Siamo</a></div>
                         {% elseif app.request.pathinfo == '/contatti' %}
@@ -147,22 +147,22 @@
                     </div>
                     <ul class="content__sidebar-menu-list">
                         <li class="content__sidebar-menu-item-list">
-                            <a class="link body-2" href="{{ path('app_category_viaggi') }}">
+                            <a class="link body-2" href="{{ path('app_category_viaggi', {pageNumber: 0}) }}">
                                 Viaggi
                             </a>
                         </li>
                         <li class="content__sidebar-menu-item-list">
-                            <a class="link body-2" href="{{ path('app_category_eventi') }}">
+                            <a class="link body-2" href="{{ path('app_category_eventi', {pageNumber: 0}) }}">
                                 Eventi
                             </a>
                         </li>
                         <li class="content__sidebar-menu-item-list">
-                            <a class="link body-2" href="{{ path('app_category_documenti') }}">
+                            <a class="link body-2" href="{{ path('app_category_documenti', {pageNumber: 0}) }}">
                                 Documenti di viaggio
                             </a>
                         </li>
                         <li class="content__sidebar-menu-item-list">
-                            <a class="link body-2" href="{{ path('app_category_estero') }}">
+                            <a class="link body-2" href="{{ path('app_category_estero', {pageNumber: 0}) }}">
                                 Vivere all'estero
                             </a>
                         </li>

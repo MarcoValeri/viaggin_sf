@@ -1,5 +1,3 @@
-{% set getDateToday = "now"|date('U') %}
-
 {% extends "base.html.twig" %}
 
 {% block title %}
@@ -21,7 +19,7 @@
 {% endblock %}
 
 {% block canonical %}
-    <link rel="canonical" href="https://viaggin.com/category/vivere-estero">
+    <link rel="canonical" href="https://viaggin.com/category/vivere-estero-pagina-{{ pageNumber }}">
 {% endblock %}
 
 {% block body %}
@@ -37,29 +35,39 @@
         <div class="home__container-title">
             <h2 class="h2">Vivere all'estero: tutte le guide di ViaggIn</h2>
         </div>
-        {% if getArticles %}
-            {% for article in getArticles|reverse %}
-                {% if getDateToday > article.getDate|date('U') and loop.index < 10 and article.getCategory() == "Vivere all'estero" %}
-                    <div class="article-card">
-                        <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
-                            <div class="article-card__container-title">
-                                <h2 class="h3">{{ article.getTitle }}</h2>
-                            </div>
-                            <div class="article-card__container-data">
-                                <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('d/m/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
-                            </div>
-                            <div class="article-card__container-content">
-                                <div class="article-card__paragraph body-2">
-                                    <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ (article.getImage) ? article.getImage.title : '' }}">
-                                    {% set articleContent = article.content|striptags|slice(0, 300) ~ '...' %}
-                                    {{ articleContent|raw }}
-                                </div>
-                            </div>
-                        </a>
+        {% for article in articles %}
+            <div class="article-card">
+                <a href="{{ path('app_article', {'slug': article.url}) }}" class="article-card__link link-no-style">
+                    <div class="article-card__container-title">
+                        <h2 class="h3">{{ article.title }}</h2>
                     </div>
+                    <div class="article-card__container-data">
+                        <span class="article-card__data body-6">Pubblicato il {{ article.date|date('d/m/Y') }}</span>
+                    </div>
+                    <div class="article-card__container-content">
+                        <div class="article-card__paragraph body-2">
+                            <img class="article-card__img" src="../images/{{ article.file_name }}" alt="{{ article.alternative_text }}">
+                            {% set articleContent = article.content|striptags|slice(0, 300) ~ '...' %}
+                            {{ articleContent|raw }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% set prevPageNumber = pageNumber - 1 %}
+        {% set nextPageNumber = pageNumber + 1 %}
+        <div class="article-buttons">
+            <div class="article-buttons__container-btn-prev">
+                {% if prevPageNumber >= 0 %}
+                    <a href="{{ path('app_category_estero', {pageNumber: prevPageNumber}) }}"><button class="button button--black">Prev</button></a>
                 {% endif %}
-            {% endfor %}
-        {% endif %}
+            </div>
+            <div class="article-buttons__container-btn-next">
+                {% if articles|length == 10 %}
+                    <a href="{{ path('app_category_estero', {pageNumber: nextPageNumber}) }}"><button class="button button--black">Next</button></a>
+                {% endif %}
+            </div>
+        </div>
         <div class="category__container-load">
             <a href="{{ path('app_categories') }}" class="button button--yellow">Tutte le categorie</a>
         </div>
