@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,7 +14,7 @@ class CategoryController extends AbstractController {
     }
 
     #[Route('/category/viaggi-pagina-{pageNumber}', name: 'app_category_viaggi')]
-    public function categoryViaggi(ArticleRepository $articleRepository, ManagerRegistry $doctrine, string $pageNumber)
+    public function categoryViaggi(ManagerRegistry $doctrine, string $pageNumber)
     {
 
         $fromArticleNumber = $pageNumber * 10;
@@ -54,7 +53,7 @@ class CategoryController extends AbstractController {
     }
 
     #[Route('/category/eventi-pagina-{pageNumber}', name: 'app_category_eventi')]
-    public function categoryEventi(ArticleRepository $articleRepository, ManagerRegistry $doctrine, string $pageNumber)
+    public function categoryEventi(ManagerRegistry $doctrine, string $pageNumber)
     {
 
         $fromArticleNumber = $pageNumber * 10;
@@ -93,7 +92,7 @@ class CategoryController extends AbstractController {
     }
 
     #[Route('/category/documenti-pagina-{pageNumber}', name: 'app_category_documenti')]
-    public function categoryDocumenti(ArticleRepository $articleRepository, ManagerRegistry $doctrine, string $pageNumber)
+    public function categoryDocumenti(ManagerRegistry $doctrine, string $pageNumber)
     {
 
         $fromArticleNumber = $pageNumber * 10;
@@ -133,7 +132,7 @@ class CategoryController extends AbstractController {
     }
 
     #[Route('/category/vivere-estero-pagina-{pageNumber}', name: 'app_category_estero')]
-    public function categoryEstero(ArticleRepository $articleRepository, ManagerRegistry $doctrine, string $pageNumber)
+    public function categoryEstero(ManagerRegistry $doctrine, string $pageNumber)
     {
 
         $fromArticleNumber = $pageNumber * 10;
@@ -170,12 +169,6 @@ class CategoryController extends AbstractController {
             return $this->redirectToRoute('app_error404');
         }
 
-        // Save all the articles into a variable
-        // $getArticles = $articleRepository->findAll();
-
-        // return $this->render('categories/vivere-estero.html.twig', [
-        //     'getArticles' => $getArticles
-        // ]);
     }
 
 }

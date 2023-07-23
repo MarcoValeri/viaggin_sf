@@ -1,5 +1,3 @@
-{% extends "base.html.twig" %}
-
 {# Set Author Variables #}
 {% if author %}
     {% set authorName = author.name %}
@@ -7,6 +5,8 @@
     {% set authorUrl = author.url %}
     {% set authorImage = author.image %}
 {% endif %}
+
+{% extends "base.html.twig" %}
 
 {% block title %}
     <title>{{ authorName|raw }} autore di ViaggIn</title>
@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block canonical %}
-    <link rel="canonical" href="https://viaggin.com/autori/{{ authorUrl }}">
+    <link rel="canonical" href="https://viaggin.com/autori/{{ slug }}/pagina-{{ pageNumber }}">
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -35,7 +35,7 @@
         <div class="breadcrumbs__container">
             <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_home') }}">Home</a>
             <span class="breadcrumbs__item breadcrumbs__item-span"> / </span>
-            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_author', {'slug': authorUrl}) }}">Autore {{ authorName }}</a>
+            <a class="breadcrumbs__item link-no-style body-4" href="{{ path('app_author', {'slug': slug, 'pageNumber': pageNumber}) }}">Autore {{ authorName }}</a>
         </div>
     </div>
 {% endblock %}
@@ -43,13 +43,13 @@
 {% block body %}
     <section class="author">
         <div class="author-card">
-            <a href="{{ path('app_author', {'slug': authorUrl}) }}" class="author-card__link link-no-style">
+            <a href="{{ path('app_author', {'slug': slug, 'pageNumber': 0}) }}" class="author-card__link link-no-style">
                 <div class="author-card__container-title">
                     <h2 class="h3">{{ authorName }}</h2>
                 </div>
                 <div class="author-card__container-content">
                     <div class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}">
+                        <img class="author-card__img" src="../../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}">
                         {{ authorDescription }}
                     </div>
                 </div>
@@ -62,7 +62,40 @@
             <div class="author__container-title">
                 <h2 class="h2">Tutti gli articoli di {{ authorName }}</h2>
             </div>
-            {% for key, article in getAllArticles|reverse %}
+            {% for article in articles %}
+            <div class="article-card">
+                <a href="{{ path('app_article', {'slug': article.articleUrl }) }}" class="article-card__link link-no-style">
+                    <div class="article-card__container-title">
+                        <h2 class="h3">{{ article.title }}</h2>
+                    </div>
+                    <div class="article-card__container-data">
+                        <span class="article-card__data body-6">Pubblicato il {{ article.date|date('d/m/Y') }}</span>
+                    </div>
+                    <div class="article-card__container-content">
+                        <div class="article-card__paragraph body-2">
+                            <img class="article-card__img" src="../../images/{{ article.file_name }}" alt="{{ article.alternative_text }}">
+                            {% set articleContent = article.content|striptags|slice(0, 300) ~ '...' %}
+                            {{ articleContent|raw }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            {% set prevPageNumber = pageNumber - 1 %}
+            {% set nextPageNumber = pageNumber + 1 %}
+            <div class="article-buttons">
+                <div class="article-buttons__container-btn-prev">
+                    {% if prevPageNumber >= 0 %}
+                        <a href="{{ path('app_author', {'slug': slug, 'pageNumber': prevPageNumber}) }}"><button class="button button--black">Prev</button></a>
+                    {% endif %}
+                </div>
+                <div class="article-buttons__container-btn-next">
+                    {% if articles|length == 10 %}
+                        <a href="{{ path('app_author', {'slug': slug, 'pageNumber': nextPageNumber}) }}"><button class="button button--black">Next</button></a>
+                    {% endif %}
+                </div>
+            </div>
+            {# {% for key, article in getAllArticles|reverse %}
                 {% if key < 10 %}
                     {% if article.author == authorName %}
                         <div class="article-card">
@@ -84,7 +117,7 @@
                         </div>
                     {% endif %}
                 {% endif %}
-            {% endfor %}
+            {% endfor %} #}
         </div>
     </section>
 {% endblock %}
