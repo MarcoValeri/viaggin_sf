@@ -1,0 +1,25 @@
+.travel-banner {
+
+    &__container-title {
+        margin-bottom: .5rem;
+    }
+
+    &__menu {
+        list-style: none;
+        margin-left: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    &__menu-item {
+        margin-bottom: .5rem;
+        background-color: $yellow-banner;
+        border-left: 3px solid $red-travel;
+        border-right: 3px solid $red-travel;
+    }
+
+    &__menu-icon {
+        width: 15px;
+        height: 15px;
+        margin: 0 1rem;
+    }
+}
