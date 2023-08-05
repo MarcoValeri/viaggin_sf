@@ -70,15 +70,18 @@ class ArticleController extends AbstractController {
         }
 
         $article = $articleRepository->findOneBy(['url' => $slug]);
-        $articleDate = $article->getDate()->format('U');
-        $todayDate = date('U');
         
-        if ($article && $todayDate > $articleDate) {
-            return $this->render('articles/article.html.twig', [
-                'article'       => $article,
-                'slug'          => $slug,
-                'formComment'   => $formComment->createView()
-            ]);
+        if ($article) {
+            $articleDate = $article->getDate()->format('U');
+            $todayDate = date('U');
+            if ($todayDate > $articleDate) {
+
+                return $this->render('articles/article.html.twig', [
+                    'article'       => $article,
+                    'slug'          => $slug,
+                    'formComment'   => $formComment->createView()
+                ]);
+            }
         } else {
             return $this->redirectToRoute('app_error404');
         }

@@ -49,7 +49,7 @@
                 </div>
                 <div class="author-card__container-content">
                     <div class="author-card__paragraph body-2">
-                        <img class="author-card__img" src="../../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}">
+                        <img class="author-card__img" src="../../images/{{ authorImage }}" alt="Immagine dell'autore {{ authorName }}" width="150" height="150">
                         {{ authorDescription }}
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="article-card__container-content">
                         <div class="article-card__paragraph body-2">
-                            <img class="article-card__img" src="../../images/{{ article.file_name }}" alt="{{ article.alternative_text }}">
+                            <img class="article-card__img" src="../../images/{{ article.file_name }}" alt="{{ article.alternative_text }}" width="150" height="100">
                             {% set articleContent = article.content|striptags|slice(0, 300) ~ '...' %}
                             {{ articleContent|raw }}
                         </div>
