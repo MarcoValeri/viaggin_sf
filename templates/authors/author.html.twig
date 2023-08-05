@@ -95,29 +95,6 @@
                     {% endif %}
                 </div>
             </div>
-            {# {% for key, article in getAllArticles|reverse %}
-                {% if key < 10 %}
-                    {% if article.author == authorName %}
-                        <div class="article-card">
-                            <a href="{{ path('app_article', {'slug': article.getUrl}) }}" class="article-card__link link-no-style">
-                                <div class="article-card__container-title">
-                                    <h2 class="h3">{{ article.getTitle }}</h2>
-                                </div>
-                                <div class="article-card__container-data">
-                                    <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('m/d/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
-                                </div>
-                                <div class="article-card__container-content">
-                                    <div class="article-card__paragraph body-2">
-                                        <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ article.getImage.title }}">
-                                        {% set articleContent = article.content|striptags|slice(0, 400) ~ '...' %}
-                                        {{ articleContent|raw }}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %} #}
         </div>
     </section>
 {% endblock %}

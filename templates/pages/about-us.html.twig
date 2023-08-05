@@ -44,7 +44,7 @@
             <h2 class="chi-siamo__authors-title h2">Collaborano ed hanno collaborato con ViaggIn</h2>
             {% for author in getAllAuthors  %}
                 <div class="author-card">
-                    <a href="{{ path('app_author', {'slug': author.url }) }}" class="author-card__link link-no-style">
+                    <a href="{{ path('app_author', {'slug': author.url, 'pageNumber': 0 }) }}" class="author-card__link link-no-style">
                         <div class="author-card__container-title">
                             <h2 class="h3">{{ author.name }}</h2>
                         </div>
