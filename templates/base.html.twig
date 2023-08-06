@@ -80,6 +80,9 @@
                             <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/chi-siamo" ? 'link-mark' : '' }}" href="{{ path('app_about-us') }}">Chi siamo</a>
                         </li>
                         <li class="nav__item">
+                            <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/cerca/risultati-di-ricerca" ? 'link-mark' : '' }}" href="{{ path('app_search') }}">Cerca</a>
+                        </li>
+                        <li class="nav__item">
                             <a class="link-effect-load {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == "/contatti" ? 'link-mark' : '' }}" href="{{ path('app_contact') }}">Contatti</a>
                         </li>
                         {% if is_granted('ROLE_ADMIN')  %}

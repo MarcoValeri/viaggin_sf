@@ -1,6 +1,10 @@
 .home {
     
     // Main container
+    &__main {
+        margin-bottom: 5rem;
+    }
+
     &__container-categories {
         display: flex;
         align-items: center;

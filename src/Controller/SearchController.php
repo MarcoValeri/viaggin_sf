@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\SearchForm;
-use App\Repository\ArticleRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class SearchController extends AbstractController
 {
     #[Route('cerca/risultati-di-ricerca', name: 'app_search', priority: 1)]
-    public function search(ArticleRepository $articleRepository, Request $request, ManagerRegistry $doctrine) {
-        
-        $articles = '';
-
+    public function search(Request $request, ManagerRegistry $doctrine)
+    {
         $searchForm = $this->createForm(SearchForm::class, [
             'action'    => $this->generateUrl('app_search')
         ]);
@@ -48,13 +45,12 @@ class SearchController extends AbstractController
             $result = $stmt->executeQuery();
             $articles = $result->fetchAllAssociative();
 
-            if (count($articles) > 0) {
-                return $this->render('search/search.html.twig', [
-                    'searchForm'    => $searchForm->createView(),
-                    'articles'      => $articles,
-                    'searchTitle'   => 'Risultati di ricerca'
-                ]);
-            }
+            return $this->render('search/search.html.twig', [
+                'searchForm'    => $searchForm->createView(),
+                'articles'      => $articles,
+                'searchTitle'   => 'Risultati di ricerca',
+                'searchInput'   => $searchInput
+            ]);
         } else {
             $fromArticleNumber = 0;
             $sqlQuery = "
@@ -71,7 +67,6 @@ class SearchController extends AbstractController
                 INNER JOIN
                     image ON article.image_id = image.id
                 WHERE article.date < NOW()
-                AND article.category_id = 4
                 ORDER BY date DESC
                 LIMIT {$fromArticleNumber}, 10
             ";
@@ -84,7 +79,8 @@ class SearchController extends AbstractController
             return $this->render('search/search.html.twig', [
                 'searchForm'    => $searchForm->createView(),
                 'articles'      => $articles,
-                'searchTitle'   => 'Ultimi articoli di ViaggIn'
+                'searchTitle'   => 'Ultimi articoli di ViaggIn',
+                'searchInput'   => ''
             ]);
         }
     }

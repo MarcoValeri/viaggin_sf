@@ -1,7 +1,5 @@
 {% extends "base.html.twig" %}
 
-{% set getDateToday = "now"|date('U') %}
-
 {% block title %}
     <title>ViaggIn: risultati di ricerca</title>
 {% endblock %}
@@ -35,7 +33,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="search">
+    <section class="search">
         {{ form_start(searchForm, {'action': path('app_search')}) }}
             <div class="search__form-wrapper">
                 <div class="search__form-header">
@@ -49,10 +47,22 @@
                 </div>
             </div>
         {{ form_end(searchForm) }}
-    </div>
+    </section>
     <section class="home__container-articles">
         <div class="home__container-title">
             <h2 class="h2">{{ searchTitle }}</h2>
+            {% if searchInput|length > 0 %}
+                <h3 class="h3">Cerca: {{ searchInput }}</h3>
+            {% endif %}
+            {% if articles|length > 0 %}
+                {% if articles|length == 1 %}
+                    <h4 class="h4">Trovato {{ articles|length }} risultato</h4>
+                {% else %}
+                    <h4 class="h4">Trovati {{ articles|length }} risultati</h4>
+                {% endif %}
+            {% else %}
+                <h4 class="h4">Nessun risultato trovato</h4>
+            {% endif %}
         </div>
         {% for article in articles %}
             <div class="article-card">

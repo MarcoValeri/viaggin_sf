@@ -1,5 +1,3 @@
-{% set getDateToday = "now"|date('U') %}
-
 {% extends "base.html.twig" %}
 
 {% block body %}
@@ -27,33 +25,44 @@
             </div>
         </div>
     </section>
+    <section class="search">
+        {{ form_start(searchForm, {'action': path('app_search')}) }}
+            <div class="search__form-wrapper">
+                <div class="search__form-header">
+                    <h2 class="h2">Cerca su ViaggIn</h2>
+                </div>
+                <div class="search__form-search-field">
+                    {{ form_row(searchForm.search) }}
+                </dv>
+                <div class="search__form-submit-field">
+                    {{ form_row(searchForm.submit) }}
+                </div>
+            </div>
+        {{ form_end(searchForm) }}
+    </section>
     <section class="home__container-articles">
         <div class="home__container-title">
             <h2 class="h2">Ultimi Articoli</h2>
         </div>
-        {% if getArticles %}
-            {% for article in getArticles|reverse %}
-                {% if getDateToday > article.getDate|date('U') and loop.index < 10 %}
-                    <div class="article-card">
-                        <a href="{{ article.getUrl }}" class="article-card__link link-no-style">
-                            <div class="article-card__container-title">
-                                <h2 class="h3">{{ article.getTitle }}</h2>
-                            </div>
-                            <div class="article-card__container-data">
-                                <span class="article-card__data body-6">Pubblicato il {{ article.getDate|date('d/m/Y') }} - {{ article.getAuthor }} - {{article.getComments|length}} {{ (article.getComments|length == 1) ? 'commento' : 'commenti' }}</span>
-                            </div>
-                            <div class="article-card__container-content">
-                                <div class="article-card__paragraph body-2">
-                                    <img class="article-card__img" src="../images/{{ article.getImage }}" alt="{{ (article.getImage) ? article.getImage.title : '' }}" width="150" height="100">
-                                    {% set articleContent = article.content|striptags|slice(0, 300) ~ '...' %}
-                                    {{ articleContent|raw }}
-                                </div>
-                            </div>
-                        </a>
+        {% for article in articles %}
+            <div class="article-card">
+                <a href="{{ path('app_article', {'slug': article.url}) }}" class="article-card__link link-no-style">
+                    <div class="article-card__container-title">
+                        <h2 class="h3">{{ article.title }}</h2>
                     </div>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+                    <div class="article-card__container-data">
+                        <span class="article-card__data body-6">Pubblicato il {{ article.date|date('d/m/Y') }}</span>
+                    </div>
+                    <div class="article-card__container-content">
+                        <div class="article-card__paragraph body-2">
+                            <img class="article-card__img" src="../images/{{ article.file_name }}" alt="{{ article.alternative_text }}" width="150" height="100">
+                            {% set articleContent = article.content|striptags|slice(0, 300) ~ '...' %}
+                            {{ articleContent|raw }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
         <div class="home__container-all-article">
             <a href="{{ path('app_article_list') }}" class="button button--yellow">Scopri tutti gli articoli</a>
         </div>
