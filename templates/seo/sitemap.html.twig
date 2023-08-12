@@ -7,19 +7,22 @@
         <loc>https://viaggin.com/categories</loc>
     </url>
     <url>
-        <loc>https://viaggin.com/category/viaggi</loc>
+        <loc>https://viaggin.com/category/viaggi-pagina-0</loc>
     </url>
     <url>
-        <loc>https://viaggin.com/category/eventi</loc>
+        <loc>https://viaggin.com/category/eventi-pagina-0</loc>
     </url>
     <url>
-        <loc>https://viaggin.com/category/documenti</loc>
+        <loc>https://viaggin.com/category/documenti-pagina-0</loc>
     </url>
     <url>
-        <loc>https://viaggin.com/category/vivere-estero</loc>
+        <loc>https://viaggin.com/category/vivere-estero-pagina-0</loc>
     </url>
     <url>
         <loc>https://viaggin.com/chi-siamo</loc>
+    </url>
+    <url>
+        <loc>https://viaggin.com/cerca/risultati-di-ricerca</loc>
     </url>
     <url>
         <loc>https://viaggin.com/contatti</loc>
@@ -27,9 +30,12 @@
     <url>
         <loc>https://viaggin.com/contatti-conferma</loc>
     </url>
+    <url>
+        <loc>https://viaggin.com/autori/tutti-gli-autori</loc>
+    </url>
     {% for author in authors %}
         <url>
-            <loc>https://viaggin.com/autori/{{ author.url }}</loc>
+            <loc>https://viaggin.com/autori/{{ author.url }}/pagina-0</loc>
         </url>
     {% endfor %}
     {% for tag in tags %}
@@ -40,13 +46,10 @@
     <url>
         <loc>https://viaggin.com/autori/tutti-gli-autori</loc>
     </url>
-    {% set getDateToday = "now"|date('U') %}
     {% for article in articles %}
-        {% if (getDateToday > article.date|date('U')) %}
-            <url>
-                <loc>https://viaggin.com/{{ article.url }}</loc>
-                <lastmod>{{ article.getUpdateAt|date('Y-m-d') }}</lastmod>
-            </url>
-        {% endif %}
+        <url>
+            <loc>https://viaggin.com/{{ article.url }}</loc>
+            <lastmod>{{ article.update_at|date('Y-m-d') }}</lastmod>
+        </url>
     {% endfor %}
 </urlset>
