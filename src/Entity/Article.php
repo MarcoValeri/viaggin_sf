@@ -46,7 +46,6 @@ class Article
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'article')]
     private $tags;
 
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 

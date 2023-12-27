@@ -37,6 +37,9 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
 
+        {# Cookie Bot Banner #}
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="125b5024-6fc6-4c41-8490-06af8d0cf0c1" data-blockingmode="auto" type="text/javascript"></script>
+
         {# Google Analytics 4 #}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSTXVCFJP7"></script>
         <script>
@@ -199,11 +202,11 @@
         <footer class="footer">
             <div class="footer__container-content">
                 <p class="body-3">Made with <span class="footer__heart">&hearts;</span> in London by Marco Valeri - &copy; {{ "now"|date("Y") }} - All rights reserved</p>
-                <p class="body-3"><a class="link-no-style link-no-style--white" href="{{ path('app_privacy_policy') }}">Privacy Policy</a> - <a class="link-no-style link-no-style--white" href="{{ path('app_cookie_policy') }}">Cookie Policy</a></p>
+                <p class="body-3"><a class="link-no-style link-no-style--white" href="{{ path('app_cookie_policy') }}">Cookie Policy</a></p>
             </div>
             <div class="footer__container-privacy">
                 <!-- Iubenda Privacy and Cookie Policy -->
-                <a href="https://www.iubenda.com/privacy-policy/36030468" class="iubenda-white no-brand iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                {# <a href="https://www.iubenda.com/privacy-policy/36030468" class="iubenda-white no-brand iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script> #}
             </div>
         </footer>
     </body>
